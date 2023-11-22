@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".fragments.MainFragment"
+              android:background="#292929"
+              android:orientation="vertical">
+
+    <Button
+            android:text="топ игроков"
+            android:layout_marginTop="100dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/minecraft"
+            android:rotation="-1"
+            android:id="@+id/topButton"/>
+
+    <Button
+            android:text="проверить онлайн"
+            android:layout_marginTop="10dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/minecraft"
+            android:rotationY="-1"
+            android:id="@+id/onlineButton"/>
+
+    <Button
+            android:text="панель админа"
+            android:layout_marginTop="10dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/minecraft"
+            android:rotation="1"
+            android:id="@+id/adminButton"/>
+
+    <Button
+            android:text="настройки"
+            android:layout_marginTop="30dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/minecraft"
+            android:rotationY="-1"
+            android:id="@+id/settingsButton"/>
+</LinearLayout>

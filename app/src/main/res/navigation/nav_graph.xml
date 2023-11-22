@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph.xml"
+            app:startDestination="@id/mainFragment">
+
+    <fragment android:id="@+id/mainFragment" android:name="ru.ashesha.admintool.fragments.MainFragment"
+              android:label="fragment_main" tools:layout="@layout/fragment_main">
+        <action android:id="@+id/action_mainFragment_to_topFragment" app:destination="@id/topFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_mainFragment_to_settingsFragment" app:destination="@id/settingsFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_mainFragment_to_onlineFragment" app:destination="@id/onlineFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_mainFragment_to_adminFragment" app:destination="@id/adminFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"/>
+    </fragment>
+    <fragment android:id="@+id/topFragment" android:name="ru.ashesha.admintool.fragments.TopFragment" android:label="fragment_top"
+              tools:layout="@layout/fragment_top"/>
+    <fragment android:id="@+id/settingsFragment" android:name="ru.ashesha.admintool.fragments.SettingsFragment"
+              android:label="fragment_settings" tools:layout="@layout/fragment_settings"/>
+    <fragment android:id="@+id/onlineFragment" android:name="ru.ashesha.admintool.fragments.OnlineFragment"
+              android:label="fragment_online" tools:layout="@layout/fragment_online"/>
+    <fragment android:id="@+id/adminFragment" android:name="ru.ashesha.admintool.fragments.AdminFragment"
+              android:label="fragment_admin" tools:layout="@layout/fragment_admin"/>
+</navigation>

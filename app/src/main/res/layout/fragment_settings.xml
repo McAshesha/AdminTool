@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#292929"
+              android:orientation="vertical"
+             tools:context=".fragments.SettingsFragment">
+
+    <TextView
+            android:text="☚ Назад"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="#B6B6B6"
+            android:fontFamily="@font/minecraft"
+            android:id="@+id/back"/>
+
+    <TextView
+            android:text="Настройки"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/minecraft"/>
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_margin="16dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <TextView
+                android:text="Аккаунты:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/minecraft"/>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_marginTop="10dp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="поиск топа -"
+                      android:textSize="16sp"
+                      android:textColor="#FFFFFF"
+                      android:layout_marginEnd="5dp"
+                      android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/topLogin"
+                    android:hint="@string/topLogin"
+                    android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/topPassword"
+                    android:hint="@string/topPassword"
+                    android:fontFamily="@font/minecraft"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="онлайн -"
+                      android:textSize="16sp"
+                      android:textColor="#FFFFFF"
+                      android:layout_marginEnd="5dp"
+                      android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/onlineLogin"
+                    android:hint="@string/onlineLogin"
+                    android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/onlinePassword"
+                    android:hint="@string/onlinePassword"
+                    android:fontFamily="@font/minecraft"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="панель админа -"
+                      android:textSize="16sp"
+                      android:textColor="#FFFFFF"
+                      android:layout_marginEnd="5dp"
+                      android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/adminLogin"
+                    android:hint="@string/adminLogin"
+                    android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/adminPassword"
+                    android:hint="@string/adminPassword"
+                    android:fontFamily="@font/minecraft"/>
+
+
+        </LinearLayout>
+
+        <Switch
+                android:text="Отправлять автосообщение - "
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/minecraft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/enableAutomessage"/>
+
+        <TextView
+                android:text="Автосообщение:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/minecraft"/>
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:gravity="start|top"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#8E8E8E"
+                android:backgroundTint="#4A4A4A"
+                android:fontFamily="@font/minecraft"
+                android:textSize="12sp"
+                android:id="@+id/automessage"
+                android:hint="@string/automessage"
+                android:ems="10"/>
+
+    </LinearLayout>
+
+</LinearLayout>

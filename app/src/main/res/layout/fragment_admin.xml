@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#292929"
+              android:orientation="vertical"
+             tools:context=".fragments.AdminFragment">
+
+    <TextView
+            android:text="☚ Назад"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="#B6B6B6"
+            android:fontFamily="@font/minecraft"
+            android:id="@+id/back"/>
+
+    <TextView
+            android:text="Панель администратора"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/minecraft"/>
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_margin="30dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="30dp"
+                      android:layout_height="wrap_content">
+
+            <Button
+                    android:text="выдать жб"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/minecraft"
+                    android:layout_marginEnd="5dp"
+                    android:rotation="1"
+                    android:id="@+id/complaint"/>
+
+            <Button
+                    android:text="забанить"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/minecraft"
+                    android:layout_marginStart="5dp"
+                    android:rotationY="-1"
+                    android:id="@+id/ban"/>
+            <!--<EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="6"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/nickComplaint"
+                    android:hint="ник"
+                    android:fontFamily="@font/minecraft"/>
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/cause"
+                    android:hint="причина"
+                    android:fontFamily="@font/minecraft"/>
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="1"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/count"
+                    android:hint="1"
+                    android:fontFamily="@font/minecraft"/>-->
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="10dp"
+                      android:layout_height="wrap_content">
+
+            <Button
+                    android:text="разбанить"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/minecraft"
+                    android:layout_marginEnd="5dp"
+                    android:rotationX="1"
+                    android:id="@+id/unban"/>
+
+            <Button
+                    android:text="игрок"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/minecraft"
+                    android:layout_marginStart="5dp"
+                    android:rotation="-1"
+                    android:id="@+id/player"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="10dp"
+                      android:layout_height="wrap_content">
+
+            <Button
+                    android:text="комната"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/minecraft"
+                    android:layout_marginEnd="5dp"
+                    android:rotation="1"
+                    android:id="@+id/room"/>
+
+            <Button
+                    android:text="поиск"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/minecraft"
+                    android:layout_marginStart="5dp"
+                    android:rotationY="-1"
+                    android:id="@+id/info"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

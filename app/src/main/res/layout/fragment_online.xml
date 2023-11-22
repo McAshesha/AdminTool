@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#292929"
+              android:orientation="vertical"
+             tools:context=".fragments.OnlineFragment">
+
+    <TextView
+            android:text="☚ Назад"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="#B6B6B6"
+            android:fontFamily="@font/minecraft"
+            android:id="@+id/back"/>
+
+    <TextView
+            android:text="Проверить онлайн игрока"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/minecraft"/>
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_margin="32dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_marginTop="20dp"
+                      android:layout_width="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:rotationY="-1"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Ник игрока:"
+                      android:textSize="18sp"
+                      android:textColor="#FFFFFF"
+                      android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:id="@+id/nick"
+                    android:hint="введи ник"
+                    android:fontFamily="@font/minecraft"/>
+
+        </LinearLayout>
+
+        <Button
+                android:text="проверить онлайн"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/minecraft"
+                android:rotation="-1"
+                android:id="@+id/checkOnline"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginTop="16dp"
+                  android:text=""
+                  android:textSize="26sp"
+                  android:textColor="#FFFFFF"
+                  android:rotation="1"
+                  android:id="@+id/online"
+                  android:fontFamily="@font/minecraft"/>
+
+        <Button
+                android:text="Добавить в друзья"
+                android:layout_marginTop="64dp"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/minecraft"
+                android:rotation="1"
+                android:visibility="invisible"
+                android:clickable="false"
+                android:id="@+id/addToFriend"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginTop="16dp"
+                  android:text=""
+                  android:textSize="10sp"
+                  android:textColor="#FFFFFF"
+                  android:rotationY="1"
+                  android:id="@+id/wait"
+                  android:fontFamily="@font/minecraft"/>
+
+    </LinearLayout>
+
+</LinearLayout>
