@@ -7,5 +7,6 @@ public class UserData {
     public static String adminLogin = "", adminPassword = "";
     public static String automessage = "";
     public static boolean enableAutomessage = false;
+    public static String version = "";
 
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="#292929"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#292929"
               android:orientation="vertical"
-             tools:context=".fragments.SettingsFragment">
+              tools:context=".fragments.SettingsFragment">
 
     <TextView
             android:text="☚ Назад"
@@ -207,6 +207,36 @@
                 android:id="@+id/automessage"
                 android:hint="@string/automessage"
                 android:ems="10"/>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_marginTop="10dp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Версия Мафии Онлайн -"
+                      android:textSize="16sp"
+                      android:textColor="#FFFFFF"
+                      android:layout_marginEnd="5dp"
+                      android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="8"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/version"
+                    android:hint="@string/version"
+                    android:fontFamily="@font/minecraft"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

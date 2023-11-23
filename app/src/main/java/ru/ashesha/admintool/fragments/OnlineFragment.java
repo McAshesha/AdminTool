@@ -2,31 +2,28 @@ package ru.ashesha.admintool.fragments;
 
 import android.os.Bundle;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import androidx.navigation.NavController;
-import io.socket.client.Socket;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
 import ru.ashesha.admintool.mo.Decoder;
 import ru.ashesha.admintool.mo.MafiaConnection;
-import ru.ashesha.admintool.mo.packets.client.*;
+import ru.ashesha.admintool.mo.packets.client.InviteFriendship;
+import ru.ashesha.admintool.mo.packets.client.Login;
+import ru.ashesha.admintool.mo.packets.client.MessageToFriend;
+import ru.ashesha.admintool.mo.packets.client.OnlineFriend;
 import ru.ashesha.admintool.mo.packets.server.FriendShipAccept;
 import ru.ashesha.admintool.mo.packets.server.ResultLogin;
 import ru.ashesha.admintool.mo.packets.server.ResultOnlineFriend;
-import ru.ashesha.admintool.mo.packets.server.ResultTop;
 import ru.ashesha.admintool.utils.UserData;
-
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.function.BiFunction;
 
 import static ru.ashesha.admintool.utils.Utils.*;
 
@@ -99,7 +96,8 @@ public class OnlineFragment extends Fragment {
 
         String onlineLogin = UserData.onlineLogin.isEmpty() ? getResources().getString(R.string.onlineLogin) : UserData.onlineLogin,
                 onlinePassword = UserData.onlinePassword.isEmpty() ? getResources().getString(R.string.onlinePassword) : UserData.onlinePassword,
-                message = UserData.automessage.isEmpty() ? getResources().getString(R.string.automessage) : UserData.automessage;
+                message = UserData.automessage.isEmpty() ? getResources().getString(R.string.automessage) : UserData.automessage,
+                version = UserData.version.isEmpty() ? getResources().getString(R.string.version) : UserData.version;
 
         String nickname = nick.getText().toString();
 
@@ -120,7 +118,7 @@ public class OnlineFragment extends Fragment {
             runOnMainThread(() -> wait.setText(msg));
         });
 
-        connection.sendPacket(new Login(onlineLogin, onlinePassword));
+        connection.sendPacket(new Login(onlineLogin, onlinePassword, version));
     }
 
     private void requestOnline() {
@@ -153,8 +151,9 @@ public class OnlineFragment extends Fragment {
 
 
         String onlineLogin = UserData.onlineLogin.isEmpty() ? getResources().getString(R.string.onlineLogin) : UserData.onlineLogin,
-                onlinePassword = UserData.onlinePassword.isEmpty() ? getResources().getString(R.string.onlinePassword) : UserData.onlinePassword;
-        connection.sendPacket(new Login(onlineLogin, onlinePassword));
+                onlinePassword = UserData.onlinePassword.isEmpty() ? getResources().getString(R.string.onlinePassword) : UserData.onlinePassword,
+                version = UserData.version.isEmpty() ? getResources().getString(R.string.version) : UserData.version;
+        connection.sendPacket(new Login(onlineLogin, onlinePassword, version));
     }
 
     private void error() {

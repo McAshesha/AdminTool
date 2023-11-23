@@ -129,8 +129,9 @@ public class TopFragment extends Fragment {
         });
 
         String topLogin = UserData.topLogin.isEmpty() ? getResources().getString(R.string.topLogin) : UserData.topLogin,
-                topPassword = UserData.topPassword.isEmpty() ? getResources().getString(R.string.topPassword) : UserData.topPassword;
-        connection.sendPacket(new  Login(topLogin, topPassword));
+                topPassword = UserData.topPassword.isEmpty() ? getResources().getString(R.string.topPassword) : UserData.topPassword,
+                version = UserData.version.isEmpty() ? getResources().getString(R.string.version) : UserData.version;
+        connection.sendPacket(new  Login(topLogin, topPassword, version));
     }
 
     private void error() {

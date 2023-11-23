@@ -12,11 +12,11 @@ public class Login extends Packet {
     final boolean me, color, isUsePassword;
 
 
-    public Login(String login, String password) {
+    public Login(String login, String password, String version) {
 
         this.login = login;
         this.password = password;
-        this.version = "163.0";
+        this.version = version;
         this.me = false;
         this.color = false;
         this.isUsePassword = true;

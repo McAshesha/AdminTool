@@ -11,4 +11,5 @@
     <string name="onlinePassword">1234</string>
     <string name="adminLogin">test-adm</string>
     <string name="adminPassword">1234</string>
+    <string name="version">163.0</string>
 </resources>

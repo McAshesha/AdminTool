@@ -5,9 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import ru.ashesha.admintool.utils.UserData;
-import ru.ashesha.admintool.utils.Utils;
 
-import static ru.ashesha.admintool.utils.Utils.*;
+import static ru.ashesha.admintool.utils.Utils.setNowActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         UserData.automessage = sharedPreferences.getString("automessage", "");
         UserData.enableAutomessage = Boolean.parseBoolean(sharedPreferences.getString("enableAutomessage", "false"));
+
+        UserData.version = sharedPreferences.getString("version", "");
     }
 
     @Override
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         editor.putString("automessage", UserData.automessage);
         editor.putString("enableAutomessage", Boolean.toString(UserData.enableAutomessage));
+
+        editor.putString("version", UserData.version);
 
         editor.apply();
     }
