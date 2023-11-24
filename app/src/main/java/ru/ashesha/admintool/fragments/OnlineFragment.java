@@ -94,31 +94,27 @@ public class OnlineFragment extends Fragment {
             return;
         }
 
-        String onlineLogin = UserData.onlineLogin.isEmpty() ? getResources().getString(R.string.onlineLogin) : UserData.onlineLogin,
-                onlinePassword = UserData.onlinePassword.isEmpty() ? getResources().getString(R.string.onlinePassword) : UserData.onlinePassword,
-                message = UserData.automessage.isEmpty() ? getResources().getString(R.string.automessage) : UserData.automessage,
-                version = UserData.version.isEmpty() ? getResources().getString(R.string.version) : UserData.version;
-
+        UserData data = UserData.getInstance();
         String nickname = nick.getText().toString();
 
         connection.registerListenerPacket(ResultLogin.class, packet -> {
             if (packet != null) {
                 Decoder.lfm = packet.wait;
-                connection.sendPacket(new InviteFriendship(onlineLogin, nickname));
+                connection.sendPacket(new InviteFriendship(data.getOnlineLogin(), nickname));
             } else error();
         });
 
         connection.registerListenerPacket(FriendShipAccept.class, packet -> {
             StringBuilder msg = new StringBuilder("Игрок принял заявку!");
-            if (UserData.enableAutomessage) {
-                connection.sendPacket(new MessageToFriend(onlineLogin, nickname, message));
+            if (data.isRealEnableAutomessage()) {
+                connection.sendPacket(new MessageToFriend(data.getOnlineLogin(), nickname, data.getAutomessage()));
                 msg.append(" Отправлено автосообщение.");
                 connection.disconnect();
             } else connection.disconnect();
             runOnMainThread(() -> wait.setText(msg));
         });
 
-        connection.sendPacket(new Login(onlineLogin, onlinePassword, version));
+        connection.sendPacket(new Login(data.getOnlineLogin(), data.getOnlinePassword(), data.getVersion()));
     }
 
     private void requestOnline() {
@@ -149,11 +145,8 @@ public class OnlineFragment extends Fragment {
             });
         });
 
-
-        String onlineLogin = UserData.onlineLogin.isEmpty() ? getResources().getString(R.string.onlineLogin) : UserData.onlineLogin,
-                onlinePassword = UserData.onlinePassword.isEmpty() ? getResources().getString(R.string.onlinePassword) : UserData.onlinePassword,
-                version = UserData.version.isEmpty() ? getResources().getString(R.string.version) : UserData.version;
-        connection.sendPacket(new Login(onlineLogin, onlinePassword, version));
+        UserData data = UserData.getInstance();
+        connection.sendPacket(new Login(data.getOnlineLogin(), data.getOnlinePassword(), data.getVersion()));
     }
 
     private void error() {

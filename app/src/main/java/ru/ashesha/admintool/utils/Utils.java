@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.widget.Toast;
 import androidx.navigation.NavController;
@@ -71,6 +72,10 @@ public class Utils {
 
     public static void setNowDeepView(View view) {
         Utils.nowDeepView = view;
+    }
+
+    public static Resources getResources() {
+        return nowActivity.getResources();
     }
 
     public static boolean isInvisibleDeepView() {

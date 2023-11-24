@@ -19,20 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setNowActivity(this);
 
         SharedPreferences sharedPreferences = getSharedPreferences("AdminData", Context.MODE_PRIVATE);
+        UserData data = UserData.getInstance();
 
-        UserData.topLogin = sharedPreferences.getString("topLogin", "");
-        UserData.topPassword = sharedPreferences.getString("topPassword", "");
+        data.setTopLogin(sharedPreferences.getString("topLogin", ""));
+        data.setTopPassword(sharedPreferences.getString("topPassword", ""));
 
-        UserData.onlineLogin = sharedPreferences.getString("onlineLogin", "");
-        UserData.onlinePassword = sharedPreferences.getString("onlinePassword", "");
+        data.setOnlineLogin(sharedPreferences.getString("onlineLogin", ""));
+        data.setOnlinePassword(sharedPreferences.getString("onlinePassword", ""));
 
-        UserData.adminLogin = sharedPreferences.getString("adminLogin", "");
-        UserData.adminPassword = sharedPreferences.getString("adminPassword", "");
+        data.setAdminLogin(sharedPreferences.getString("adminLogin", ""));
+        data.setAdminPassword(sharedPreferences.getString("adminPassword", ""));
 
-        UserData.automessage = sharedPreferences.getString("automessage", "");
-        UserData.enableAutomessage = Boolean.parseBoolean(sharedPreferences.getString("enableAutomessage", "false"));
+        data.setAutomessage(sharedPreferences.getString("automessage", ""));
+        data.setEnableAutomessage(Boolean.parseBoolean(sharedPreferences.getString("enableAutomessage", "false")));
 
-        UserData.version = sharedPreferences.getString("version", "");
+        data.setVersion(sharedPreferences.getString("version", ""));
     }
 
     @Override
@@ -40,20 +41,21 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         SharedPreferences sharedPreferences = getSharedPreferences("AdminData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        UserData data = UserData.getInstance();
 
-        editor.putString("topLogin", UserData.topLogin);
-        editor.putString("topPassword", UserData.topPassword);
+        editor.putString("topLogin", data.getRealTopLogin());
+        editor.putString("topPassword", data.getRealTopPassword());
 
-        editor.putString("onlineLogin", UserData.onlineLogin);
-        editor.putString("onlinePassword", UserData.onlinePassword);
+        editor.putString("onlineLogin", data.getRealOnlineLogin());
+        editor.putString("onlinePassword", data.getRealOnlinePassword());
 
-        editor.putString("adminLogin", UserData.adminLogin);
-        editor.putString("adminPassword", UserData.adminPassword);
+        editor.putString("adminLogin", data.getRealAdminLogin());
+        editor.putString("adminPassword", data.getRealAdminPassword());
 
-        editor.putString("automessage", UserData.automessage);
-        editor.putString("enableAutomessage", Boolean.toString(UserData.enableAutomessage));
+        editor.putString("automessage", data.getRealAutomessage());
+        editor.putString("enableAutomessage", Boolean.toString(data.isRealEnableAutomessage()));
 
-        editor.putString("version", UserData.version);
+        editor.putString("version", data.getRealVersion());
 
         editor.apply();
     }

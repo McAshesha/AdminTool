@@ -28,6 +28,7 @@ public class SettingsFragment extends Fragment {
         NavController controller = findNavController();
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
 
+        UserData data = UserData.getInstance();
         EditText topLogin = view.findViewById(R.id.topLogin), topPassword = view.findViewById(R.id.topPassword),
                 onlineLogin = view.findViewById(R.id.onlineLogin), onlinePassword = view.findViewById(R.id.onlinePassword),
                 adminLogin = view.findViewById(R.id.adminLogin), adminPassword = view.findViewById(R.id.adminPassword),
@@ -36,25 +37,25 @@ public class SettingsFragment extends Fragment {
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         Switch enableAutomessage = view.findViewById(R.id.enableAutomessage);
 
-        version.setText(UserData.version);
-        enableAutomessage.setChecked(UserData.enableAutomessage);
-        topLogin.setText(UserData.topLogin);
-        topPassword.setText(UserData.topPassword);
-        onlineLogin.setText(UserData.onlineLogin);
-        onlinePassword.setText(UserData.onlinePassword);
-        adminLogin.setText(UserData.adminLogin);
-        adminPassword.setText(UserData.adminPassword);
-        automessage.setText(UserData.automessage);
+        version.setText(data.getRealVersion());
+        enableAutomessage.setChecked(data.isRealEnableAutomessage());
+        topLogin.setText(data.getRealTopLogin());
+        topPassword.setText(data.getRealTopPassword());
+        onlineLogin.setText(data.getRealOnlineLogin());
+        onlinePassword.setText(data.getRealOnlinePassword());
+        adminLogin.setText(data.getRealAdminLogin());
+        adminPassword.setText(data.getRealAdminPassword());
+        automessage.setText(data.getRealAutomessage());
 
-        version.addTextChangedListener((TextListener) s -> UserData.version = s.toString());
-        enableAutomessage.setOnCheckedChangeListener((li, i) -> UserData.enableAutomessage = li.isChecked());
-        topLogin.addTextChangedListener((TextListener) s -> UserData.topLogin = s.toString());
-        topPassword.addTextChangedListener((TextListener) s -> UserData.topPassword = s.toString());
-        onlineLogin.addTextChangedListener((TextListener) s -> UserData.onlineLogin = s.toString());
-        onlinePassword.addTextChangedListener((TextListener) s -> UserData.onlinePassword = s.toString());
-        adminLogin.addTextChangedListener((TextListener) s -> UserData.adminLogin = s.toString());
-        adminPassword.addTextChangedListener((TextListener) s -> UserData.adminPassword = s.toString());
-        automessage.addTextChangedListener((TextListener) s -> UserData.automessage = s.toString());
+        version.addTextChangedListener((TextListener) s -> data.setVersion(s.toString()));
+        enableAutomessage.setOnCheckedChangeListener((li, i) -> data.setEnableAutomessage(li.isChecked()));
+        topLogin.addTextChangedListener((TextListener) s -> data.setTopLogin(s.toString()));
+        topPassword.addTextChangedListener((TextListener) s -> data.setTopPassword(s.toString()));
+        onlineLogin.addTextChangedListener((TextListener) s -> data.setOnlineLogin(s.toString()));
+        onlinePassword.addTextChangedListener((TextListener) s -> data.setOnlinePassword(s.toString()));
+        adminLogin.addTextChangedListener((TextListener) s -> data.setAdminLogin(s.toString()));
+        adminPassword.addTextChangedListener((TextListener) s -> data.setAdminPassword(s.toString()));
+        automessage.addTextChangedListener((TextListener) s -> data.setAutomessage(s.toString()));
     }
 
     @Override
