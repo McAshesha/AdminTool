@@ -9,10 +9,7 @@
         <action android:id="@+id/action_invisibleFragment_to_menuTopFragment" app:destination="@id/menuTopFragment"
                 app:exitAnim="@anim/slide_out_bottom" app:popEnterAnim="@anim/slide_in_bottom"
                 app:popExitAnim="@anim/slide_out_top" app:enterAnim="@anim/slide_in_top"/>
-        <action android:id="@+id/action_invisibleFragment_to_banFragment" app:destination="@id/banFragment"/>
     </fragment>
     <fragment android:id="@+id/menuTopFragment" android:name="ru.ashesha.admintool.fragments.deep.MenuTopFragment"
               android:label="fragment_menu_top" tools:layout="@layout/fragment_menu_top"/>
-    <fragment android:id="@+id/banFragment" android:name="ru.ashesha.admintool.fragments.deep.BanFragment" android:label="fragment_ban"
-              tools:layout="@layout/fragment_ban"/>
 </navigation>

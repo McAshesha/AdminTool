@@ -24,7 +24,7 @@ public class Utils {
     @SuppressLint("StaticFieldLeak")
     private static Activity nowActivity;
     @SuppressLint("StaticFieldLeak")
-    public static View nowView, nowDeepView;
+    private static View nowView, nowDeepView;
 
     public static void sleep(long millis) {
         try {
