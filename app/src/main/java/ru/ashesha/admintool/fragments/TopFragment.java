@@ -19,13 +19,15 @@ import ru.ashesha.admintool.mo.packets.client.Top;
 import ru.ashesha.admintool.mo.packets.server.ResultLogin;
 import ru.ashesha.admintool.mo.packets.server.ResultOnlineFriend;
 import ru.ashesha.admintool.mo.packets.server.ResultTop;
+import ru.ashesha.admintool.utils.Device;
 import ru.ashesha.admintool.utils.UserData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static ru.ashesha.admintool.utils.Utils.*;
+import static ru.ashesha.admintool.utils.Utils.EXECUTOR;
+import static ru.ashesha.admintool.utils.Utils.sleep;
 
 public class TopFragment extends Fragment {
 
@@ -51,8 +53,9 @@ public class TopFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setNowView(view);
-        NavController controller = findNavController();
+        Device device = Device.getInstance();
+        device.loadNowView(view);
+        NavController controller = device.findNavController();
         title = view.findViewById(R.id.title);
         list = view.findViewById(R.id.listTop);
         TextView back = view.findViewById(R.id.back);
@@ -60,10 +63,10 @@ public class TopFragment extends Fragment {
         back.setOnClickListener(v -> controller.popBackStack());
 
         list.setOnClickListener(v -> {
-            NavController deepController = findDeepNavController();
-            if (isInvisibleDeepView())
-                deepController.navigate(R.id.action_invisibleFragment_to_menuTopFragment);
-            else deepController.popBackStack();
+            NavController smallController = device.findSmallNavController();
+            if (device.isNowSmallViewHidden())
+                smallController.navigate(R.id.action_invisibleFragment_to_menuTopFragment);
+            else smallController.popBackStack();
         });
 
         EXECUTOR.execute(this::requestListTop);
@@ -121,7 +124,8 @@ public class TopFragment extends Fragment {
                 result.append(lines.get(i));
             }
 
-            runOnMainThread(() -> {
+            Device device = Device.getInstance();
+            device.runOnMainThread(() -> {
                 title.setText("Список топа игроков:");
                 list.setText(result);
                 list.setClickable(true);
@@ -134,7 +138,8 @@ public class TopFragment extends Fragment {
 
     private void error() {
         pause();
-        runOnMainThread(() -> title.setText("☢Произошла ошибка☢ ;("));
+        Device device = Device.getInstance();
+        device.runOnMainThread(() -> title.setText("☢Произошла ошибка☢ ;("));
     }
 
     public static List<String> getLines() {

@@ -10,17 +10,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
+import ru.ashesha.admintool.utils.Device;
 
-import static ru.ashesha.admintool.utils.Utils.findNavController;
-import static ru.ashesha.admintool.utils.Utils.setNowView;
 
 public class AdminFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setNowView(view);
-        NavController controller = findNavController();
+        Device device = Device.getInstance();
+        device.loadNowView(view);
+        NavController controller = device.findNavController();
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
     }
 

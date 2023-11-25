@@ -11,11 +11,11 @@ import androidx.navigation.NavController;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
 import ru.ashesha.admintool.fragments.TopFragment;
+import ru.ashesha.admintool.utils.Device;
 
 import java.util.List;
 import java.util.function.Function;
 
-import static ru.ashesha.admintool.utils.Utils.*;
 
 public class MenuTopFragment extends Fragment {
 
@@ -27,9 +27,10 @@ public class MenuTopFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setNowDeepView(view);
-        setInvisibleDeepView(false);
-        NavController controller = findDeepNavController();
+        Device device = Device.getInstance();
+        device.loadNowSmallView(view);
+        device.setNowSmallViewHidden(false);
+        NavController controller = device.findSmallNavController();
 
         List<String> lines = TopFragment.getLines();
 
@@ -40,14 +41,14 @@ public class MenuTopFragment extends Fragment {
         StringBuilder builder = new StringBuilder();
         lines.forEach(builder::append);
 
-        view.findViewById(R.id.firstButton).setOnClickListener(v -> copyTextToClipboard(getPlace.apply(0)));
-        view.findViewById(R.id.secondButton).setOnClickListener(v -> copyTextToClipboard(getPlace.apply(1)));
-        view.findViewById(R.id.thirdButton).setOnClickListener(v -> copyTextToClipboard(getPlace.apply(2)));
-        view.findViewById(R.id.fourthButton).setOnClickListener(v -> copyTextToClipboard(getPlace.apply(3)));
-        view.findViewById(R.id.fifthButton).setOnClickListener(v -> copyTextToClipboard(getPlace.apply(4)));
+        view.findViewById(R.id.firstButton).setOnClickListener(v -> device.copyTextToClipboard(getPlace.apply(0)));
+        view.findViewById(R.id.secondButton).setOnClickListener(v -> device.copyTextToClipboard(getPlace.apply(1)));
+        view.findViewById(R.id.thirdButton).setOnClickListener(v -> device.copyTextToClipboard(getPlace.apply(2)));
+        view.findViewById(R.id.fourthButton).setOnClickListener(v -> device.copyTextToClipboard(getPlace.apply(3)));
+        view.findViewById(R.id.fifthButton).setOnClickListener(v -> device.copyTextToClipboard(getPlace.apply(4)));
         view.findViewById(R.id.allButton).setOnClickListener(v -> {
             controller.popBackStack();
-            copyTextToClipboard(builder.toString());
+            device.copyTextToClipboard(builder.toString());
         });
     }
 

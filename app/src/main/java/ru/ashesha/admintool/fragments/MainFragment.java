@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
+import ru.ashesha.admintool.utils.Device;
+import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 
-import static ru.ashesha.admintool.utils.Utils.*;
 
 public class MainFragment extends Fragment {
 
@@ -19,19 +20,22 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setNowView(view);
-        NavController controller = findNavController();
-        view.findViewById(R.id.topButton).setOnClickListener(v -> controller.navigate(R.id.action_mainFragment_to_topFragment));
-        view.findViewById(R.id.settingsButton).setOnClickListener(v -> controller.navigate(R.id.action_mainFragment_to_settingsFragment));
-        view.findViewById(R.id.onlineButton).setOnClickListener(v -> controller.navigate(R.id.action_mainFragment_to_onlineFragment));
-        view.findViewById(R.id.adminButton).setOnClickListener(v -> controller.navigate(R.id.action_mainFragment_to_adminFragment));
+        Device device = Device.getInstance();
+
+        device.loadNowView(view);
+        NavController controller = device.findNavController();
+        view.findViewById(R.id.topButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_topFragment));
+        view.findViewById(R.id.settingsButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_settingsFragment));
+        view.findViewById(R.id.onlineButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_onlineFragment));
+        view.findViewById(R.id.adminButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_adminFragment));
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (!isInvisibleDeepView())
-            findDeepNavController().popBackStack();
+        Device device = Device.getInstance();
+        if (!device.isNowSmallViewHidden())
+            device.findSmallNavController().popBackStack();
     }
 
     @Override

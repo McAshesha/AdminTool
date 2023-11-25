@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
-import ru.ashesha.admintool.utils.Utils;
+import ru.ashesha.admintool.utils.Device;
 
 public class InvisibleFragment extends Fragment {
 
@@ -21,8 +21,9 @@ public class InvisibleFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Utils.setNowDeepView(view);
-        Utils.setInvisibleDeepView(true);
+        Device device = Device.getInstance();
+        device.loadNowSmallView(view);
+        device.setNowSmallViewHidden(true);
     }
 
     @Override

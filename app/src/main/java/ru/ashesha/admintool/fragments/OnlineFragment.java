@@ -1,7 +1,6 @@
 package ru.ashesha.admintool.fragments;
 
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,12 @@ import ru.ashesha.admintool.mo.packets.client.OnlineFriend;
 import ru.ashesha.admintool.mo.packets.server.FriendShipAccept;
 import ru.ashesha.admintool.mo.packets.server.ResultLogin;
 import ru.ashesha.admintool.mo.packets.server.ResultOnlineFriend;
+import ru.ashesha.admintool.utils.Device;
+import ru.ashesha.admintool.utils.Device.OnTextChangeListener;
 import ru.ashesha.admintool.utils.UserData;
 
-import static ru.ashesha.admintool.utils.Utils.*;
+import static ru.ashesha.admintool.utils.Utils.EXECUTOR;
+import static ru.ashesha.admintool.utils.Utils.sleep;
 
 public class OnlineFragment extends Fragment {
 
@@ -55,8 +57,9 @@ public class OnlineFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setNowView(view);
-        NavController controller = findNavController();
+        Device device = Device.getInstance();
+        device.loadNowView(view);
+        NavController controller = device.findNavController();
         TextView back = view.findViewById(R.id.back);
         nick = view.findViewById(R.id.nick);
         checkOnline = view.findViewById(R.id.checkOnline);
@@ -82,7 +85,7 @@ public class OnlineFragment extends Fragment {
             EXECUTOR.execute(this::sendFriendRequest);
         });
 
-        nick.addTextChangedListener((TextListener) s -> pause());
+        nick.addTextChangedListener((OnTextChangeListener) s -> pause());
     }
 
     private void sendFriendRequest() {
@@ -111,7 +114,8 @@ public class OnlineFragment extends Fragment {
                 msg.append(" Отправлено автосообщение.");
                 connection.disconnect();
             } else connection.disconnect();
-            runOnMainThread(() -> wait.setText(msg));
+            Device device = Device.getInstance();
+            device.runOnMainThread(() -> wait.setText(msg));
         });
 
         connection.sendPacket(new Login(data.getOnlineLogin(), data.getOnlinePassword(), data.getVersion()));
@@ -135,11 +139,12 @@ public class OnlineFragment extends Fragment {
 
         connection.registerListenerPacket(ResultOnlineFriend.class, packet -> {
             connection.disconnect();
-            runOnMainThread(() -> online.setText(packet.onlines.get(0) ? "Онлайн" : "Оффлайн"));
+            Device device = Device.getInstance();
+            device.runOnMainThread(() -> online.setText(packet.onlines.get(0) ? "Онлайн" : "Оффлайн"));
             sleep(3500);
             if (!packet.onlines.get(0))
                 return;
-            runOnMainThread(() -> {
+            device.runOnMainThread(() -> {
                 addToFriend.setClickable(true);
                 addToFriend.setVisibility(View.VISIBLE);
             });
@@ -150,7 +155,8 @@ public class OnlineFragment extends Fragment {
     }
 
     private void error() {
-        runOnMainThread(() -> {
+        Device device = Device.getInstance();
+        device.runOnMainThread(() -> {
             pause();
             title.setText("☢Произошла ошибка☢ ;(");
         });
@@ -159,16 +165,6 @@ public class OnlineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_online, container, false);
-    }
-
-    interface TextListener extends TextWatcher {
-        @Override
-        default void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        default void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
     }
 
 }

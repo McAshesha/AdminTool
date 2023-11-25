@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import ru.ashesha.admintool.utils.Device;
 import ru.ashesha.admintool.utils.UserData;
 
-import static ru.ashesha.admintool.utils.Utils.setNowActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        setNowActivity(this);
+        Device device = Device.getInstance();
+        device.loadNowActivity(this);
 
         SharedPreferences sharedPreferences = getSharedPreferences("AdminData", Context.MODE_PRIVATE);
         UserData data = UserData.getInstance();
@@ -58,5 +59,11 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("version", data.getRealVersion());
 
         editor.apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Device.getInstance().destroy();
     }
 }
