@@ -115,7 +115,7 @@ public class Device {
     }
 
 
-    public static interface OnClickListenerWithSound extends View.OnClickListener {
+    public interface OnClickListenerWithSound extends View.OnClickListener {
         @Override
         default void onClick(View v) {
             MediaPlayer media = Device.getInstance().media;
@@ -131,7 +131,7 @@ public class Device {
         void onClickWithSound(View v);
     }
 
-    public static interface OnTextChangeListener extends TextWatcher {
+    public interface OnTextChangeListener extends TextWatcher {
         @Override
         default void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }

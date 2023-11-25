@@ -21,7 +21,6 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Device device = Device.getInstance();
-
         device.loadNowView(view);
         NavController controller = device.findNavController();
         view.findViewById(R.id.topButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_topFragment));

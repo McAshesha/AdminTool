@@ -23,6 +23,7 @@ import ru.ashesha.admintool.mo.packets.server.FriendShipAccept;
 import ru.ashesha.admintool.mo.packets.server.ResultLogin;
 import ru.ashesha.admintool.mo.packets.server.ResultOnlineFriend;
 import ru.ashesha.admintool.utils.Device;
+import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 import ru.ashesha.admintool.utils.Device.OnTextChangeListener;
 import ru.ashesha.admintool.utils.UserData;
 
@@ -69,7 +70,7 @@ public class OnlineFragment extends Fragment {
         addToFriend = view.findViewById(R.id.addToFriend);
 
         back.setOnClickListener(v -> controller.popBackStack());
-        checkOnline.setOnClickListener(v -> {
+        checkOnline.setOnClickListener((OnClickListenerWithSound) v -> {
             title.setText("Проверить онлайн игрока");
             if (nick.getText().toString().isEmpty())
                 return;
@@ -78,7 +79,7 @@ public class OnlineFragment extends Fragment {
             EXECUTOR.execute(this::requestOnline);
         });
 
-        addToFriend.setOnClickListener(v -> {
+        addToFriend.setOnClickListener((OnClickListenerWithSound) v -> {
             wait.setText("Ждем ответ от игрока...");
             addToFriend.setVisibility(View.INVISIBLE);
             addToFriend.setClickable(false);
