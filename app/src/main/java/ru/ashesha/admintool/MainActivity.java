@@ -10,12 +10,12 @@ import ru.ashesha.admintool.utils.UserData;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
         Device device = Device.getInstance();
         device.loadNowActivity(this);
 
@@ -66,4 +66,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Device.getInstance().destroy();
     }
+
 }

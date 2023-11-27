@@ -33,7 +33,7 @@ public class TopFragment extends Fragment {
 
     private TextView title, list;
 
-    private static List<String> lines;
+    private List<String> lines;
     private MafiaConnection connection;
 
 
@@ -41,6 +41,12 @@ public class TopFragment extends Fragment {
     public void onPause() {
         super.onPause();
         pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Device.getInstance().getDataModel().removeInfo("top");
     }
 
     private void pause() {
@@ -125,6 +131,7 @@ public class TopFragment extends Fragment {
             }
 
             Device device = Device.getInstance();
+            device.getDataModel().putInfo("top", new ArrayList<>(lines));
             device.runOnMainThread(() -> {
                 title.setText("Список топа игроков:");
                 list.setText(result);
@@ -140,10 +147,6 @@ public class TopFragment extends Fragment {
         pause();
         Device device = Device.getInstance();
         device.runOnMainThread(() -> title.setText("☢Произошла ошибка☢ ;("));
-    }
-
-    public static List<String> getLines() {
-        return lines;
     }
 
     @Override

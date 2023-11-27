@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
-import ru.ashesha.admintool.fragments.TopFragment;
 import ru.ashesha.admintool.utils.Device;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class MenuTopFragment extends Fragment {
         device.setNowSmallViewHidden(false);
         NavController controller = device.findSmallNavController();
 
-        List<String> lines = TopFragment.getLines();
+        List<String> lines = device.getDataModel().getInfo("top");
 
         Function<Integer, String> getPlace = (integer) -> {
             controller.popBackStack();

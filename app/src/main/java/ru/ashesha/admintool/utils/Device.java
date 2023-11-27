@@ -11,9 +11,14 @@ import android.media.MediaPlayer;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.google.android.material.snackbar.Snackbar;
+import org.json.JSONException;
+import org.json.JSONObject;
 import ru.ashesha.admintool.R;
 
 public class Device {
@@ -33,6 +38,7 @@ public class Device {
     private Activity nowActivity;
     private View nowView, nowSmallView;
     private MediaPlayer media;
+    private ViewModelProvider provider;
 
 
     private Device() {
@@ -67,9 +73,14 @@ public class Device {
 
 
 
-    public void loadNowActivity(Activity activity)  {
+    public DataModel getDataModel() {
+        return provider.get(DataModel.class);
+    }
+
+    public void loadNowActivity(AppCompatActivity activity)  {
         this.nowActivity = activity;
         media = MediaPlayer.create(nowActivity, R.raw.click);
+        provider = new ViewModelProvider(activity);
     }
 
     public void loadNowView(View view) {
@@ -138,6 +149,31 @@ public class Device {
 
         @Override
         default void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+    }
+
+    public static class DataModel extends ViewModel {
+        private JSONObject json = new JSONObject();
+
+        public void putInfo(String key, Object info) {
+            try {
+                if (json.has(key))
+                    json.remove(key);
+                json.put(key, info);
+            } catch (JSONException ignored) {
+            }
+        }
+
+        public <T> T getInfo(String key) {
+            try {
+                return (T) json.get(key);
+            } catch (JSONException e) {
+                return null;
+            }
+        }
+
+        public void removeInfo(String key) {
+            json.remove(key);
         }
     }
 
