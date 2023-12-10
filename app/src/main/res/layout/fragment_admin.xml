@@ -26,6 +26,7 @@
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:textColor="#FFFFFF"
+            android:id="@+id/test"
             android:fontFamily="@font/minecraft"/>
 
     <LinearLayout android:orientation="vertical"
@@ -161,6 +162,13 @@
                     android:id="@+id/info"/>
 
         </LinearLayout>
+        <androidx.fragment.app.FragmentContainerView
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navGraph="@navigation/nav_admin_graph"
+                app:defaultNavHost="true" android:id="@+id/fragmentContainerView3"/>
 
     </LinearLayout>
 

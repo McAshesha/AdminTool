@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,19 +12,28 @@ import androidx.navigation.NavController;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
 import ru.ashesha.admintool.utils.Device;
+import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 
 
 public class AdminFragment extends Fragment {
 
     //TODO: Включить работоспособность кнопок
 
+    //TODO: исправить проблемы SmallController'а (идет пересечение двух навграфов в данном поле)
+
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Device device = Device.getInstance();
         device.loadNowView(view);
-        NavController controller = device.findNavController();
+        NavController controller = device.findNavController(), smallController = device.findSmallNavController();
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
+
+        TextView test = view.findViewById(R.id.test);
+
+        view.findViewById(R.id.complaint).setOnClickListener((OnClickListenerWithSound) l -> {
+                smallController.navigate(R.id.action_adminEmptyFragment_to_complaintFragment2);
+        });
     }
 
     @Override
