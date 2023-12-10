@@ -1,15 +1,14 @@
 <resources>
     <string name="app_name">Инструмент админа</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="automessage">Привет!\nВ этом месяце ты хорошо поднялся в таблице лидеров. Поэтому мы бы хотели тебе
         предложить поучаствовать в персональном интервью!\nПожалуйста свяжись со мной: @ссылка в тг
     </string>
-    <string name="topLogin">test-top</string>
-    <string name="topPassword">1234</string>
-    <string name="onlineLogin">test-onl</string>
-    <string name="onlinePassword">1234</string>
-    <string name="adminLogin">test-adm</string>
-    <string name="adminPassword">1234</string>
-    <string name="version">163.0</string>
+    <string name="topLogin" translatable="false">test-top</string>
+    <string name="topPassword" translatable="false">1234</string>
+    <string name="onlineLogin" translatable="false">test-onl</string>
+    <string name="onlinePassword" translatable="false">1234</string>
+    <string name="adminLogin" translatable="false">test-adm</string>
+    <string name="adminPassword" translatable="false">1234</string>
+    <string name="version" translatable="false">163.0</string>
 </resources>

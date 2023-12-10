@@ -10,6 +10,14 @@ import ru.ashesha.admintool.utils.UserData;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * TODO: Добавить фрагмент декодера + энкодера
+     * TODO: Добавить фрагмент сырого подключения с билдером пакетов
+     * TODO: Добавить фрагмент топа классики
+     * TODO: Добавить фрагменты связанные с районами
+     * TODO: Добавить кнопку редирект на разработчика
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

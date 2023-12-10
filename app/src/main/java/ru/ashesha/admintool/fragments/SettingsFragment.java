@@ -19,6 +19,10 @@ import ru.ashesha.admintool.utils.UserData;
 
 public class SettingsFragment extends Fragment {
 
+    /**
+     * TODO: Добавить билдер пакетов
+     */
+
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
