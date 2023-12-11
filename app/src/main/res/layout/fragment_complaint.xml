@@ -3,9 +3,9 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-              android:background="#303030"
+              android:background="#292929"
               android:orientation="vertical"
-             tools:context=".fragments.deep.ComplaintFragment">
+             tools:context=".fragments.admin.ComplaintFragment">
 
     <LinearLayout android:orientation="horizontal"
                   android:layout_marginTop="20dp"

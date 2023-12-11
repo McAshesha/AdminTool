@@ -1,4 +1,4 @@
-package ru.ashesha.admintool.fragments.deep;
+package ru.ashesha.admintool.fragments.admin;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,13 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
 import ru.ashesha.admintool.utils.Device;
 
-public class AdminEmptyFragment extends Fragment {
+public class InvisibleFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Device device = Device.getInstance();
-        device.loadNowSmallView(view);
-        device.setNowSmallViewHidden(true);
+        Device.getInstance().loadNowAdminView(view);
     }
 
     @Override

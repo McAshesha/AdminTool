@@ -34,9 +34,9 @@ public class Device {
 
 
 
-    private boolean nowSmallViewHidden = true;
+    private boolean nowMenuViewHidden = true;
     private Activity nowActivity;
-    private View nowView, nowSmallView;
+    private View nowView, nowMenuView, nowAdminView;
     private MediaPlayer media;
     private ViewModelProvider provider;
 
@@ -87,28 +87,40 @@ public class Device {
         this.nowView = view;
     }
 
-    public void loadNowSmallView(View view) {
-        nowSmallView = view;
+    public void loadNowMenuView(View view) {
+        this.nowMenuView = view;
     }
+
+    public void loadNowAdminView(View view) {
+        this.nowAdminView = view;
+    }
+
+
 
     public Resources getResources() {
         return nowActivity.getResources();
     }
 
-    public boolean isNowSmallViewHidden() {
-        return nowSmallViewHidden;
+    public boolean isNowMenuViewHidden() {
+        return nowMenuViewHidden;
     }
 
-    public void setNowSmallViewHidden(boolean nowSmallViewHidden) {
-        this.nowSmallViewHidden = nowSmallViewHidden;
+    public void setNowMenuViewHidden(boolean nowMenuViewHidden) {
+        this.nowMenuViewHidden = nowMenuViewHidden;
     }
+
+
 
     public NavController findNavController() {
         return Navigation.findNavController(nowView);
     }
 
-    public NavController findSmallNavController() {
-        return Navigation.findNavController(nowSmallView);
+    public NavController findMenuNavController() {
+        return Navigation.findNavController(nowMenuView);
+    }
+
+    public NavController findAdminNavController() {
+        return Navigation.findNavController(nowAdminView);
     }
 
 
@@ -121,7 +133,8 @@ public class Device {
     public void destroy() {
         nowActivity = null;
         nowView = null;
-        nowSmallView = null;
+        nowMenuView = null;
+        nowAdminView = null;
         media = null;
     }
 

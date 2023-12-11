@@ -18,21 +18,18 @@ import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 public class AdminFragment extends Fragment {
 
     //TODO: Включить работоспособность кнопок
-
-    //TODO: исправить проблемы SmallController'а (идет пересечение двух навграфов в данном поле)
-
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Device device = Device.getInstance();
         device.loadNowView(view);
-        NavController controller = device.findNavController(), smallController = device.findSmallNavController();
+        NavController controller = device.findNavController();
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
 
         TextView test = view.findViewById(R.id.test);
 
         view.findViewById(R.id.complaint).setOnClickListener((OnClickListenerWithSound) l -> {
-                smallController.navigate(R.id.action_adminEmptyFragment_to_complaintFragment2);
+            device.findAdminNavController().navigate(R.id.action_adminEmptyFragment_to_complaintFragment2);
         });
     }
 

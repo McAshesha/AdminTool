@@ -4,12 +4,11 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_top_graph"
             app:startDestination="@id/invisibleFragment">
 
-    <fragment android:id="@+id/invisibleFragment" android:name="ru.ashesha.admintool.fragments.deep.InvisibleFragment"
+    <fragment android:id="@+id/invisibleFragment" android:name="ru.ashesha.admintool.fragments.menu.InvisibleFragment"
               android:label="fragment_invisible" tools:layout="@layout/fragment_invisible">
         <action android:id="@+id/action_invisibleFragment_to_menuTopFragment" app:destination="@id/menuTopFragment"
-                app:exitAnim="@anim/slide_out_bottom" app:popEnterAnim="@anim/slide_in_bottom"
-                app:popExitAnim="@anim/slide_out_top" app:enterAnim="@anim/slide_in_top"/>
+        />
     </fragment>
-    <fragment android:id="@+id/menuTopFragment" android:name="ru.ashesha.admintool.fragments.deep.MenuTopFragment"
+    <fragment android:id="@+id/menuTopFragment" android:name="ru.ashesha.admintool.fragments.menu.MenuTopFragment"
               android:label="fragment_menu_top" tools:layout="@layout/fragment_menu_top"/>
 </navigation>

@@ -69,10 +69,10 @@ public class TopFragment extends Fragment {
         back.setOnClickListener(v -> controller.popBackStack());
 
         list.setOnClickListener(v -> {
-            NavController smallController = device.findSmallNavController();
-            if (device.isNowSmallViewHidden())
-                smallController.navigate(R.id.action_invisibleFragment_to_menuTopFragment);
-            else smallController.popBackStack();
+            NavController menuController = device.findMenuNavController();
+            if (device.isNowMenuViewHidden())
+                menuController.navigate(R.id.action_invisibleFragment_to_menuTopFragment);
+            else menuController.popBackStack();
         });
 
         EXECUTOR.execute(this::requestListTop);

@@ -1,4 +1,4 @@
-package ru.ashesha.admintool.fragments.deep;
+package ru.ashesha.admintool.fragments.menu;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,9 +27,9 @@ public class MenuTopFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Device device = Device.getInstance();
-        device.loadNowSmallView(view);
-        device.setNowSmallViewHidden(false);
-        NavController controller = device.findSmallNavController();
+        device.loadNowMenuView(view);
+        device.setNowMenuViewHidden(false);
+        NavController controller = device.findMenuNavController();
 
         List<String> lines = device.getDataModel().getInfo("top");
 

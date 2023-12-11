@@ -33,8 +33,8 @@ public class MainFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Device device = Device.getInstance();
-        if (!device.isNowSmallViewHidden())
-            device.findSmallNavController().popBackStack();
+        if (!device.isNowMenuViewHidden())
+            device.findMenuNavController().popBackStack();
     }
 
     @Override
