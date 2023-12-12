@@ -21,6 +21,7 @@ public class SettingsFragment extends Fragment {
 
     /**
      * TODO: Добавить билдер пакетов
+     * TODO: Добавить кнопку выключения звука
      */
 
     @Override

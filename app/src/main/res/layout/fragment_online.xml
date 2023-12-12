@@ -73,6 +73,8 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/minecraft"
                 android:rotation="-1"
+                android:visibility="invisible"
+                android:clickable="false"
                 android:id="@+id/checkOnline"/>
 
         <TextView android:layout_width="wrap_content"

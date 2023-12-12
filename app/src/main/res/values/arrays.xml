@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cause">
+        <item>оскорбление</item>
+        <item>слив</item>
+        <item>патимир</item>
+        <item>твиноводство</item>
+        <item>другое</item>
+    </string-array>
+
+    <string-array name="count">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>

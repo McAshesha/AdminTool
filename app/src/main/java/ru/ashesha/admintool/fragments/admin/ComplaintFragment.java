@@ -1,6 +1,9 @@
 package ru.ashesha.admintool.fragments.admin;
 
 import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,6 +13,7 @@ import android.view.ViewGroup;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
 import ru.ashesha.admintool.utils.Device;
+import ru.ashesha.admintool.utils.Device.OnItemSelectedWithSound;
 
 public class ComplaintFragment extends Fragment {
     @Override
@@ -17,6 +21,16 @@ public class ComplaintFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Device device = Device.getInstance();
         device.loadNowAdminView(view);
+        device.setNowAdminViewHidden(false);
+
+        Spinner cause = view.findViewById(R.id.cause);
+        EditText other = view.findViewById(R.id.other);
+
+        cause.setOnItemSelectedListener((OnItemSelectedWithSound) (v, position, id) -> {
+            if (position == 4)
+                other.setVisibility(View.VISIBLE);
+            else other.setVisibility(View.INVISIBLE);
+        });
     }
 
     @Override

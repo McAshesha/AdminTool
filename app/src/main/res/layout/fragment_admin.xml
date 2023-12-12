@@ -26,12 +26,11 @@
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:textColor="#FFFFFF"
-            android:id="@+id/test"
             android:fontFamily="@font/minecraft"/>
 
     <LinearLayout android:orientation="vertical"
                   android:layout_gravity="center_horizontal"
-                  android:layout_margin="30dp"
+                  android:layout_margin="25dp"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
 
@@ -60,50 +59,6 @@
                     android:layout_marginStart="5dp"
                     android:rotationY="-1"
                     android:id="@+id/ban"/>
-            <!--<EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="6"
-                    android:textSize="12sp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8E8E8E"
-                    android:backgroundTint="#4A4A4A"
-                    android:textAlignment="center"
-                    android:layout_marginStart="5dp"
-                    android:id="@+id/nickComplaint"
-                    android:hint="ник"
-                    android:fontFamily="@font/minecraft"/>
-
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="8"
-                    android:textSize="12sp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8E8E8E"
-                    android:backgroundTint="#4A4A4A"
-                    android:textAlignment="center"
-                    android:layout_marginStart="5dp"
-                    android:id="@+id/cause"
-                    android:hint="причина"
-                    android:fontFamily="@font/minecraft"/>
-
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="1"
-                    android:textSize="12sp"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#8E8E8E"
-                    android:backgroundTint="#4A4A4A"
-                    android:textAlignment="center"
-                    android:layout_marginStart="5dp"
-                    android:id="@+id/count"
-                    android:hint="1"
-                    android:fontFamily="@font/minecraft"/>-->
 
         </LinearLayout>
 

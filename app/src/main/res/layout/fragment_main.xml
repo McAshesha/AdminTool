@@ -48,6 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/minecraft"
-            android:rotationY="-1"
+            android:rotationY="1"
             android:id="@+id/settingsButton"/>
 </LinearLayout>

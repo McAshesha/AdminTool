@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
@@ -34,7 +35,7 @@ public class Device {
 
 
 
-    private boolean nowMenuViewHidden = true;
+    private boolean nowMenuViewHidden = true, nowAdminViewHidden = true;
     private Activity nowActivity;
     private View nowView, nowMenuView, nowAdminView;
     private MediaPlayer media;
@@ -109,6 +110,14 @@ public class Device {
         this.nowMenuViewHidden = nowMenuViewHidden;
     }
 
+    public boolean isNowAdminViewHidden() {
+        return nowAdminViewHidden;
+    }
+
+    public void setNowAdminViewHidden(boolean nowAdminViewHidden) {
+        this.nowAdminViewHidden = nowAdminViewHidden;
+    }
+
 
 
     public NavController findNavController() {
@@ -153,6 +162,27 @@ public class Device {
         }
 
         void onClickWithSound(View v);
+    }
+
+    public interface OnItemSelectedWithSound extends AdapterView.OnItemSelectedListener {
+        @Override
+        default void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            MediaPlayer media = Device.getInstance().media;
+            if (media != null) {
+                if (media.isPlaying()) {
+                    media.pause();
+                } else media.start();
+                media.seekTo(500);
+            }
+            onClickWithSound(view, position, id);
+        }
+
+        @Override
+        default void onNothingSelected(AdapterView<?> parent) {
+
+        }
+
+        void onClickWithSound(View view, int position, long id);
     }
 
     public interface OnTextChangeListener extends TextWatcher {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/minecraft</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="backgroundTint">#4d4c4c</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:colorBackground">#292929</item>
+    </style>
+
+</resources>

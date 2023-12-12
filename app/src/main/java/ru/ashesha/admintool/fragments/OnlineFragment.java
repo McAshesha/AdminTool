@@ -86,7 +86,13 @@ public class OnlineFragment extends Fragment {
             EXECUTOR.execute(this::sendFriendRequest);
         });
 
-        nick.addTextChangedListener((OnTextChangeListener) s -> pause());
+        nick.addTextChangedListener((OnTextChangeListener) s -> {
+            pause();
+            if (s.toString().isEmpty()) {
+                checkOnline.setVisibility(View.INVISIBLE);
+                checkOnline.setClickable(false);
+            }
+        });
     }
 
     private void sendFriendRequest() {

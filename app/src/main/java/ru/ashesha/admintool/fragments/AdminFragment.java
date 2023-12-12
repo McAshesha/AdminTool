@@ -26,11 +26,17 @@ public class AdminFragment extends Fragment {
         NavController controller = device.findNavController();
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
 
-        TextView test = view.findViewById(R.id.test);
-
         view.findViewById(R.id.complaint).setOnClickListener((OnClickListenerWithSound) l -> {
-            device.findAdminNavController().navigate(R.id.action_adminEmptyFragment_to_complaintFragment2);
+            NavController adminController = device.findAdminNavController();
+            if (!device.isNowAdminViewHidden())
+                adminController.popBackStack();
+            adminController.navigate(R.id.action_adminEmptyFragment_to_complaintFragment2);
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override

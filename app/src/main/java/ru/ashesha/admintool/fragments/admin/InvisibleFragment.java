@@ -15,7 +15,9 @@ public class InvisibleFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Device.getInstance().loadNowAdminView(view);
+        Device device = Device.getInstance();
+        device.loadNowAdminView(view);
+        device.setNowAdminViewHidden(true);
     }
 
     @Override
