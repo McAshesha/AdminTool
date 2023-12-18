@@ -47,6 +47,10 @@ public class TopFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         Device.getInstance().getDataModel().removeInfo("top");
+        connection = null;
+        lines = null;
+        title = null;
+        list = null;
     }
 
     private void pause() {

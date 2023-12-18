@@ -23,14 +23,16 @@ public class ComplaintFragment extends Fragment {
         device.loadNowAdminView(view);
         device.setNowAdminViewHidden(false);
 
-        Spinner cause = view.findViewById(R.id.cause);
-        EditText other = view.findViewById(R.id.other);
+        Spinner cause = view.findViewById(R.id.cause), count = view.findViewById(R.id.count);
+        EditText other = view.findViewById(R.id.other), nick = view.findViewById(R.id.nick);
 
         cause.setOnItemSelectedListener((OnItemSelectedWithSound) (v, position, id) -> {
             if (position == 4)
                 other.setVisibility(View.VISIBLE);
             else other.setVisibility(View.INVISIBLE);
         });
+
+        
     }
 
     @Override

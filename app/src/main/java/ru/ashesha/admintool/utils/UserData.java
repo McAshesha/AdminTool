@@ -8,7 +8,7 @@ public class UserData {
     private String onlineLogin = "", onlinePassword = "";
     private String adminLogin = "", adminPassword = "";
     private String automessage = "";
-    private boolean enableAutomessage = false;
+    private boolean enableAutomessage = false, enableSoundClick = true;
     private String version = "";
     private final Device device;
 
@@ -115,6 +115,13 @@ public class UserData {
     }
     public void setEnableAutomessage(boolean enableAutomessage) {
         this.enableAutomessage = enableAutomessage;
+    }
+
+    public boolean isRealEnableSoundClick() {
+        return enableSoundClick;
+    }
+    public void setEnableSoundClick(boolean enableSoundClick) {
+        this.enableSoundClick = enableSoundClick;
     }
 
 

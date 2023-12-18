@@ -43,6 +43,18 @@ public class OnlineFragment extends Fragment {
         pause();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        nick = null;
+        online = null;
+        wait = null;
+        title = null;
+        checkOnline = null;
+        addToFriend = null;
+        connection = null;
+    }
+
     private void pause() {
         if (connection != null)
             connection.disconnect();
@@ -51,8 +63,13 @@ public class OnlineFragment extends Fragment {
         wait.setText("");
         addToFriend.setVisibility(View.INVISIBLE);
         addToFriend.setClickable(false);
-        checkOnline.setVisibility(View.VISIBLE);
-        checkOnline.setClickable(true);
+        if (nick.getText().toString().isEmpty()) {
+            checkOnline.setVisibility(View.INVISIBLE);
+            checkOnline.setClickable(false);
+        } else {
+            checkOnline.setVisibility(View.VISIBLE);
+            checkOnline.setClickable(true);
+        }
     }
 
     @Override
@@ -86,13 +103,7 @@ public class OnlineFragment extends Fragment {
             EXECUTOR.execute(this::sendFriendRequest);
         });
 
-        nick.addTextChangedListener((OnTextChangeListener) s -> {
-            pause();
-            if (s.toString().isEmpty()) {
-                checkOnline.setVisibility(View.INVISIBLE);
-                checkOnline.setClickable(false);
-            }
-        });
+        nick.addTextChangedListener((OnTextChangeListener) s -> pause());
     }
 
     private void sendFriendRequest() {

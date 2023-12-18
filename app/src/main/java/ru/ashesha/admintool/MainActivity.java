@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         data.setEnableAutomessage(Boolean.parseBoolean(sharedPreferences.getString("enableAutomessage", "false")));
 
         data.setVersion(sharedPreferences.getString("version", ""));
+        data.setEnableSoundClick(Boolean.parseBoolean(sharedPreferences.getString("enableSoundClick", "true")));
     }
 
     @Override
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("enableAutomessage", Boolean.toString(data.isRealEnableAutomessage()));
 
         editor.putString("version", data.getRealVersion());
+        editor.putString("enableSoundClick", Boolean.toString(data.isRealEnableSoundClick()));
 
         editor.apply();
     }

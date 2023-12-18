@@ -152,7 +152,7 @@ public class Device {
         @Override
         default void onClick(View v) {
             MediaPlayer media = Device.getInstance().media;
-            if (media != null) {
+            if (media != null && UserData.getInstance().isRealEnableSoundClick()) {
                 if (media.isPlaying()) {
                     media.pause();
                 } else media.start();
@@ -168,7 +168,7 @@ public class Device {
         @Override
         default void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             MediaPlayer media = Device.getInstance().media;
-            if (media != null) {
+            if (media != null && UserData.getInstance().isRealEnableSoundClick()) {
                 if (media.isPlaying()) {
                     media.pause();
                 } else media.start();

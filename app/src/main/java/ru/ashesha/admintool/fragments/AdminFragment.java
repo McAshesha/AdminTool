@@ -37,6 +37,10 @@ public class AdminFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        Device device = Device.getInstance();
+        NavController adminController = device.findAdminNavController();
+        if (!device.isNowAdminViewHidden())
+            adminController.popBackStack();
     }
 
     @Override

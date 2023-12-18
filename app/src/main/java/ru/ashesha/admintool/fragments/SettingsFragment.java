@@ -21,7 +21,6 @@ public class SettingsFragment extends Fragment {
 
     /**
      * TODO: Добавить билдер пакетов
-     * TODO: Добавить кнопку выключения звука
      */
 
     @Override
@@ -39,10 +38,12 @@ public class SettingsFragment extends Fragment {
                 automessage = view.findViewById(R.id.automessage), version = view.findViewById(R.id.version);
 
         @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch enableAutomessage = view.findViewById(R.id.enableAutomessage);
+        Switch enableAutomessage = view.findViewById(R.id.enableAutomessage),
+                enableSoundClick = view.findViewById(R.id.enableSoundClick);
 
         version.setText(data.getRealVersion());
         enableAutomessage.setChecked(data.isRealEnableAutomessage());
+        enableSoundClick.setChecked(data.isRealEnableSoundClick());
         topLogin.setText(data.getRealTopLogin());
         topPassword.setText(data.getRealTopPassword());
         onlineLogin.setText(data.getRealOnlineLogin());
@@ -53,6 +54,7 @@ public class SettingsFragment extends Fragment {
 
         version.addTextChangedListener((OnTextChangeListener) s -> data.setVersion(s.toString()));
         enableAutomessage.setOnCheckedChangeListener((li, i) -> data.setEnableAutomessage(li.isChecked()));
+        enableSoundClick.setOnCheckedChangeListener((li, i) -> data.setEnableSoundClick(li.isChecked()));
         topLogin.addTextChangedListener((OnTextChangeListener) s -> data.setTopLogin(s.toString()));
         topPassword.addTextChangedListener((OnTextChangeListener) s -> data.setTopPassword(s.toString()));
         onlineLogin.addTextChangedListener((OnTextChangeListener) s -> data.setOnlineLogin(s.toString()));
