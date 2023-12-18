@@ -18,4 +18,8 @@ public class Utils {
         }
     }
 
+    public interface Method {
+        void apply();
+    }
+
 }
