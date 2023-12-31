@@ -9,5 +9,5 @@
     <string name="onlinePassword" translatable="false">1234</string>
     <string name="adminLogin" translatable="false">test-adm</string>
     <string name="adminPassword" translatable="false">1234</string>
-    <string name="version" translatable="false">163.0</string>
+    <string name="version" translatable="false">171.0</string>
 </resources>

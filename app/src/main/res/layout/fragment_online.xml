@@ -75,6 +75,7 @@
                 android:rotation="-1"
                 android:visibility="invisible"
                 android:clickable="false"
+                android:textColor="#FFFFFF"
                 android:id="@+id/checkOnline"/>
 
         <TextView android:layout_width="wrap_content"
@@ -99,6 +100,7 @@
                 android:rotation="1"
                 android:visibility="invisible"
                 android:clickable="false"
+                android:textColor="#FFFFFF"
                 android:id="@+id/addToFriend"/>
 
         <TextView android:layout_width="wrap_content"

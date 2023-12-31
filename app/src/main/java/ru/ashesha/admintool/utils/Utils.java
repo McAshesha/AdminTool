@@ -15,6 +15,7 @@ public class Utils {
         try {
             Thread.sleep(millis);
         } catch (Throwable ignored) {
+            ignored.printStackTrace();
         }
     }
 

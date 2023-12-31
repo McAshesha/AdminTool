@@ -37,7 +37,6 @@
         <LinearLayout android:orientation="horizontal"
                       android:layout_width="wrap_content"
                       android:layout_gravity="center_horizontal"
-                      android:layout_marginTop="30dp"
                       android:layout_height="wrap_content">
 
             <Button
@@ -47,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/minecraft"
                     android:layout_marginEnd="5dp"
+                    android:textColor="#FFFFFF"
                     android:rotation="1"
                     android:id="@+id/complaint"/>
 
@@ -55,6 +55,7 @@
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/minecraft"
                     android:layout_marginStart="5dp"
                     android:rotationY="-1"
@@ -73,6 +74,7 @@
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/minecraft"
                     android:layout_marginEnd="5dp"
                     android:rotationX="1"
@@ -85,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/minecraft"
                     android:layout_marginStart="5dp"
+                    android:textColor="#FFFFFF"
                     android:rotation="-1"
                     android:id="@+id/player"/>
 
@@ -104,11 +107,13 @@
                     android:fontFamily="@font/minecraft"
                     android:layout_marginEnd="5dp"
                     android:rotation="1"
+                    android:textColor="#FFFFFF"
                     android:id="@+id/room"/>
 
             <Button
                     android:text="поиск"
                     android:textSize="14sp"
+                    android:textColor="#FFFFFF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/minecraft"

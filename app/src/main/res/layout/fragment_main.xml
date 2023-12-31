@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/minecraft"
+            android:textColor="#FFFFFF"
             android:rotation="-1"
             android:id="@+id/topButton"/>
 
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/minecraft"
+            android:textColor="#FFFFFF"
             android:rotationY="-1"
             android:id="@+id/onlineButton"/>
 
@@ -34,6 +36,7 @@
             android:layout_marginTop="10dp"
             android:textSize="17sp"
             android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/minecraft"
@@ -43,6 +46,7 @@
     <Button
             android:text="настройки"
             android:layout_marginTop="30dp"
+            android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -82,6 +82,8 @@ public class TopFragment extends Fragment {
         EXECUTOR.execute(this::requestListTop);
         EXECUTOR.execute(() -> {
             sleep(10_000);
+            if (list == null || title == null || lines == null)
+                return;
             if (!list.getText().toString().isEmpty())
                 return;
             if (connection != null)

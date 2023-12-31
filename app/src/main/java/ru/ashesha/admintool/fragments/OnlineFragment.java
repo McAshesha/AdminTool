@@ -89,8 +89,6 @@ public class OnlineFragment extends Fragment {
         back.setOnClickListener(v -> controller.popBackStack());
         checkOnline.setOnClickListener((OnClickListenerWithSound) v -> {
             title.setText("Проверить онлайн игрока");
-            if (nick.getText().toString().isEmpty())
-                return;
             checkOnline.setVisibility(View.INVISIBLE);
             checkOnline.setClickable(false);
             EXECUTOR.execute(this::requestOnline);

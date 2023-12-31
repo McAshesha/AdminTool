@@ -24,6 +24,8 @@ public class AdminFragment extends Fragment {
         Device device = Device.getInstance();
         device.loadNowView(view);
         NavController controller = device.findNavController();
+
+
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
 
         view.findViewById(R.id.complaint).setOnClickListener((OnClickListenerWithSound) l -> {
