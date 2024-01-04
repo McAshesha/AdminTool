@@ -20,7 +20,7 @@ public class ListOfServers extends Packet {
 
                 names.add(array.getJSONObject(i).getString("id"));
 
-            } catch (Exception | Error ignored) {}
+            } catch (Throwable ignored) {}
 
         }
 

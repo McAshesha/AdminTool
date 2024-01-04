@@ -9,9 +9,12 @@
                 app:destination="@id/complaintFragment"
         />
         <action android:id="@+id/action_adminEmptyFragment_to_banFragment" app:destination="@id/banFragment"/>
+        <action android:id="@+id/action_adminEmptyFragment_to_unbanFragment" app:destination="@id/unbanFragment"/>
     </fragment>
     <fragment android:id="@+id/complaintFragment" android:name="ru.ashesha.admintool.fragments.admin.ComplaintFragment"
               android:label="fragment_complaint" tools:layout="@layout/fragment_complaint"/>
     <fragment android:id="@+id/banFragment" android:name="ru.ashesha.admintool.fragments.admin.BanFragment" android:label="fragment_ban"
               tools:layout="@layout/fragment_ban"/>
+    <fragment android:id="@+id/unbanFragment" android:name="ru.ashesha.admintool.fragments.admin.UnbanFragment"
+              android:label="fragment_unban" tools:layout="@layout/fragment_unban"/>
 </navigation>

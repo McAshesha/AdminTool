@@ -3,7 +3,6 @@ package ru.ashesha.admintool.fragments.admin;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,20 +21,22 @@ import ru.ashesha.admintool.mo.packets.server.NewMessageRegionChat;
 import ru.ashesha.admintool.mo.packets.server.ResultLogin;
 import ru.ashesha.admintool.utils.Device;
 import ru.ashesha.admintool.utils.UserData;
-import ru.ashesha.admintool.utils.Utils;
-import ru.ashesha.admintool.utils.Utils.Method;
 
 import static ru.ashesha.admintool.utils.Utils.EXECUTOR;
 import static ru.ashesha.admintool.utils.Utils.sleep;
 
-public class BanFragment extends Fragment {
+public class UnbanFragment extends Fragment {
 
     private MafiaConnection connection;
     private TextView resultInfo;
-    private Button ban;
-    private EditText other, nick, room;
-    private Spinner cause, period;
-    private int lengthArrayCause;
+    private Button unban;
+    private EditText nick;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_unban, container, false);
+    }
+
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -44,50 +45,29 @@ public class BanFragment extends Fragment {
         device.loadNowAdminView(view);
         device.setNowAdminViewHidden(false);
 
-        lengthArrayCause = device.getResources().getStringArray(R.array.cause).length;
-
-        cause = view.findViewById(R.id.cause);
-        room = view.findViewById(R.id.room);
-        period = view.findViewById(R.id.period);
-        other = view.findViewById(R.id.other);
         nick = view.findViewById(R.id.nick);
-        ban = view.findViewById(R.id.ban);
+        unban = view.findViewById(R.id.unban);
         resultInfo = view.findViewById(R.id.resultInfo);
 
-        Method method = () -> {
-            if (!nick.getText().toString().isEmpty() && !room.getText().toString().isEmpty() &&
-                    (cause.getSelectedItemPosition() != lengthArrayCause - 1 ||
-                            cause.getSelectedItemPosition() == lengthArrayCause - 1 &&
-                                    !other.getText().toString().isEmpty())) {
-                ban.setVisibility(View.VISIBLE);
-                ban.setClickable(true);
+        nick.addTextChangedListener((Device.OnTextChangeListener) l -> {
+            if (nick.getText().toString().isEmpty()) {
+                unban.setVisibility(View.INVISIBLE);
+                unban.setClickable(false);
             } else {
-                ban.setVisibility(View.INVISIBLE);
-                ban.setClickable(false);
+                unban.setVisibility(View.VISIBLE);
+                unban.setClickable(true);
             }
             resultInfo.setText("");
-        };
-
-        cause.setOnItemSelectedListener((Device.OnItemSelectedWithSound) (v, position, id) -> {
-            if (position == lengthArrayCause - 1)
-                other.setVisibility(View.VISIBLE);
-            else other.setVisibility(View.INVISIBLE);
-            method.apply();
         });
 
-        period.setOnItemSelectedListener((Device.OnItemSelectedWithSound) (v, position, id) -> method.apply());
-        room.addTextChangedListener((Device.OnTextChangeListener) l -> method.apply());
-        nick.addTextChangedListener((Device.OnTextChangeListener) l -> method.apply());
-        other.addTextChangedListener((Device.OnTextChangeListener) l -> method.apply());
-
-        ban.setOnClickListener((Device.OnClickListenerWithSound) l -> {
-            ban.setVisibility(View.INVISIBLE);
-            ban.setClickable(false);
+        unban.setOnClickListener((Device.OnClickListenerWithSound) l -> {
+            unban.setVisibility(View.INVISIBLE);
+            unban.setClickable(false);
             resultInfo.setText("");
             EXECUTOR.execute(this::sendRequest);
             EXECUTOR.execute(() -> {
                 sleep(10_000);
-                if (connection == null || resultInfo == null || ban == null || other == null || nick == null || cause == null || period == null || room == null || !connection.connected() || !resultInfo.getText().toString().isEmpty())
+                if (connection == null || resultInfo == null || unban == null || nick == null || !connection.connected() || !resultInfo.getText().toString().isEmpty())
                     return;
                 error();
             });
@@ -108,14 +88,13 @@ public class BanFragment extends Fragment {
                 Decoder.lfm = packet.wait;
                 connection.sendPacket(new EnterRegionChat());
                 sleep(100);
-                String causeStr = cause.getSelectedItemPosition() == lengthArrayCause - 1 ? other.getText().toString() : cause.getSelectedItem().toString();
-                String command = String.format("[%s]-/забанить Комната-%s Причина-%s Срок-%s", nick.getText(), room.getText(), causeStr, period.getSelectedItem().toString());
+                String command = String.format("[%s]-/разблокировать", nick.getText());
                 connection.sendPacket(new SendMessageToRegionChat(command, ""));
                 /*sleep(100);
                 connection.disconnect();
                 Device device = Device.getInstance();
                 device.runOnMainThread(() -> {
-                    resultInfo.setText("Игрок заблокирован!");
+                    resultInfo.setText("Игрок разблокирован!");
                     ban.setVisibility(View.VISIBLE);
                     ban.setClickable(true);
                 });*/
@@ -129,8 +108,8 @@ public class BanFragment extends Fragment {
             Device device = Device.getInstance();
             device.runOnMainThread(() -> {
                 resultInfo.setText(packet.message);
-                ban.setVisibility(View.VISIBLE);
-                ban.setClickable(true);
+                unban.setVisibility(View.VISIBLE);
+                unban.setClickable(true);
             });
         });
 
@@ -141,8 +120,8 @@ public class BanFragment extends Fragment {
     private void error() {
         Device device = Device.getInstance();
         device.runOnMainThread(() -> {
-            ban.setVisibility(View.INVISIBLE);
-            ban.setClickable(false);
+            unban.setVisibility(View.INVISIBLE);
+            unban.setClickable(false);
             nick.setText("");
             resultInfo.setText("☢Произошла ошибка☢ ;(");
         });
@@ -155,17 +134,8 @@ public class BanFragment extends Fragment {
             connection.disconnect();
         connection = null;
         resultInfo = null;
-        ban = null;
-        other = null;
+        unban = null;
         nick = null;
-        cause = null;
-        period = null;
-        room = null;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ban, container, false);
     }
 
 }

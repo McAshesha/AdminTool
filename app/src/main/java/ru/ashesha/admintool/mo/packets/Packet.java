@@ -23,14 +23,14 @@ public abstract class Packet {
                     field.setAccessible(true);
                     field.set(packet, json.get(field.getName()));
 
-                } catch (Exception | Error ignored) {
+                } catch (Throwable ignored) {
                 }
 
             }
 
             return packet;
 
-        } catch (Exception | Error ignored) {
+        } catch (Throwable ignored) {
 
             return null;
 
@@ -53,7 +53,7 @@ public abstract class Packet {
 
             return packet;
 
-        } catch (Exception | Error ignored) {
+        } catch (Throwable ignored) {
 
             return null;
 
@@ -73,7 +73,7 @@ public abstract class Packet {
                 field.setAccessible(true);
                 field.set(this, json.get(field.getName()));
 
-            } catch (Exception | Error ignored) {
+            } catch (Throwable ignored) {
             }
 
         }
@@ -93,7 +93,7 @@ public abstract class Packet {
                 field.setAccessible(true);
                 json.put(field.getName(), field.get(this));
 
-            } catch (Exception | Error ignored) {
+            } catch (Throwable ignored) {
             }
 
         }

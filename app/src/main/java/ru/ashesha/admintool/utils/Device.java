@@ -8,6 +8,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.provider.Settings;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +23,10 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
 import ru.ashesha.admintool.R;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
 
 public class Device {
 
@@ -71,6 +77,84 @@ public class Device {
         clipboardManager.setPrimaryClip(clipData);
         showToastBar("Скопировано в буфер обмена!");
     }
+
+
+
+    public String getLoginI() {
+        try {
+            return Settings.Secure.getString(nowActivity.getContentResolver(), "android_id") + " ! " +
+                    Settings.Secure.getString(nowActivity.getContentResolver(), "default_input_method") + " ! " +
+                    Settings.Secure.getString(nowActivity.getContentResolver(), "settings_classname") + " ! " +
+                    Settings.Secure.getString(nowActivity.getContentResolver(), "allowed_geolocation_origins") +
+                    " ! " + Build.ID + " ! " + Build.MODEL + " ! " + Build.SERIAL;
+        } catch (Throwable e) {
+            return e.toString();
+        }
+    }
+
+    public String getLoginM1() {
+        return getLoginM("wlan0");
+    }
+
+    public String getLoginM2() {
+        return getLoginM("eth0");
+    }
+
+    public String getLoginP1() {
+        return getLoginP(true);
+    }
+
+    public String getLoginP2() {
+        return getLoginP(false);
+    }
+
+    private String getLoginM(String str) {
+        try {
+            for (NetworkInterface networkInterface : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+                if (str == null || networkInterface.getName().equalsIgnoreCase(str)) {
+                    byte[] hardwareAddress = networkInterface.getHardwareAddress();
+                    if (hardwareAddress == null)
+                        return "";
+
+                    StringBuilder sb = new StringBuilder();
+                    for (byte address : hardwareAddress)
+                        sb.append(String.format("%02X:", address));
+
+                    if (sb.length() > 0)
+                        sb.deleteCharAt(sb.length() - 1);
+
+                    return sb.toString();
+                }
+            }
+        } catch (Throwable ignored) {
+        }
+        return "";
+    }
+
+    private String getLoginP(boolean z) {
+        try {
+            for (NetworkInterface networkInterface : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+                for (InetAddress inetAddress : Collections.list(networkInterface.getInetAddresses())) {
+                    if (inetAddress.isLoopbackAddress())
+                        continue;
+
+                    String hostAddress = inetAddress.getHostAddress();
+                    boolean z2 = hostAddress.indexOf(58) < 0;
+                    if (z) {
+                        if (z2)
+                            return hostAddress;
+
+                    } else if (!z2) {
+                        int indexOf = hostAddress.indexOf(37);
+                        return indexOf < 0 ? hostAddress.toUpperCase() : hostAddress.substring(0, indexOf).toUpperCase();
+                    }
+                }
+            }
+        } catch (Throwable ignored) {
+        }
+        return "";
+    }
+
 
 
 

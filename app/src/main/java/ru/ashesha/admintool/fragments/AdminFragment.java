@@ -40,6 +40,13 @@ public class AdminFragment extends Fragment {
                 adminController.popBackStack();
             adminController.navigate(R.id.action_adminEmptyFragment_to_banFragment);
         });
+
+        view.findViewById(R.id.unban).setOnClickListener((OnClickListenerWithSound) l -> {
+            NavController adminController = device.findAdminNavController();
+            if (!device.isNowAdminViewHidden())
+                adminController.popBackStack();
+            adminController.navigate(R.id.action_adminEmptyFragment_to_unbanFragment);
+        });
     }
 
     @Override

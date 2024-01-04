@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#292929"
+              android:orientation="vertical"
+              tools:context=".fragments.admin.UnbanFragment">
+
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_marginTop="10dp"
+                  android:layout_width="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:rotationY="-1"
+                  android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Ник игрока:"
+                  android:textSize="18sp"
+                  android:textColor="#FFFFFF"
+                  android:fontFamily="@font/minecraft"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#8E8E8E"
+                android:backgroundTint="#4A4A4A"
+                android:textAlignment="center"
+                android:id="@+id/nick"
+                android:hint="введи ник"
+                android:fontFamily="@font/minecraft"/>
+
+    </LinearLayout>
+
+    <Button
+            android:text="разблокировать"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/minecraft"
+            android:rotationY="1"
+            android:visibility="invisible"
+            android:textColor="#FFFFFF"
+            android:clickable="false"
+            android:id="@+id/unban"/>
+
+    <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/resultInfo"
+            android:fontFamily="@font/minecraft"/>
+
+</LinearLayout>
