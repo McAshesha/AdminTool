@@ -25,12 +25,13 @@ import ru.ashesha.admintool.utils.UserData;
 import static ru.ashesha.admintool.utils.Utils.EXECUTOR;
 import static ru.ashesha.admintool.utils.Utils.sleep;
 
-public class UnbanFragment extends Fragment {
+public class RoomFragment extends Fragment {
+
 
     private MafiaConnection connection;
     private TextView resultInfo;
-    private Button unban;
-    private EditText nick;
+    private Button get;
+    private EditText number;
 
 
     @Override
@@ -40,29 +41,29 @@ public class UnbanFragment extends Fragment {
         device.loadNowAdminView(view);
         device.setNowAdminViewHidden(false);
 
-        nick = view.findViewById(R.id.nick);
-        unban = view.findViewById(R.id.unban);
+        number = view.findViewById(R.id.number);
+        get = view.findViewById(R.id.get);
         resultInfo = view.findViewById(R.id.resultInfo);
 
-        nick.addTextChangedListener((Device.OnTextChangeListener) l -> {
-            if (nick.getText().toString().isEmpty()) {
-                unban.setVisibility(View.INVISIBLE);
-                unban.setClickable(false);
+        number.addTextChangedListener((Device.OnTextChangeListener) l -> {
+            if (number.getText().toString().isEmpty()) {
+                get.setVisibility(View.INVISIBLE);
+                get.setClickable(false);
             } else {
-                unban.setVisibility(View.VISIBLE);
-                unban.setClickable(true);
+                get.setVisibility(View.VISIBLE);
+                get.setClickable(true);
             }
             resultInfo.setText("");
         });
 
-        unban.setOnClickListener((Device.OnClickListenerWithSound) l -> {
-            unban.setVisibility(View.INVISIBLE);
-            unban.setClickable(false);
+        get.setOnClickListener((Device.OnClickListenerWithSound) l -> {
+            get.setVisibility(View.INVISIBLE);
+            get.setClickable(false);
             resultInfo.setText("");
             EXECUTOR.execute(this::sendRequest);
             EXECUTOR.execute(() -> {
                 sleep(10_000);
-                if (connection == null || resultInfo == null || unban == null || nick == null || !connection.connected() || !resultInfo.getText().toString().isEmpty())
+                if (connection == null || resultInfo == null || get == null || number == null || !connection.connected() || !resultInfo.getText().toString().isEmpty())
                     return;
                 error();
             });
@@ -83,16 +84,9 @@ public class UnbanFragment extends Fragment {
                 Decoder.lfm = packet.wait;
                 connection.sendPacket(new EnterRegionChat());
                 sleep(100);
-                String command = String.format("[%s]-/разблокировать", nick.getText());
+                String command = String.format("[%s]-/комната", number.getText());
+                System.out.println(command);
                 connection.sendPacket(new SendMessageToRegionChat(command, ""));
-                /*sleep(100);
-                connection.disconnect();
-                Device device = Device.getInstance();
-                device.runOnMainThread(() -> {
-                    resultInfo.setText("Игрок разблокирован!");
-                    ban.setVisibility(View.VISIBLE);
-                    ban.setClickable(true);
-                });*/
             } else error();
         });
 
@@ -103,8 +97,8 @@ public class UnbanFragment extends Fragment {
             Device device = Device.getInstance();
             device.runOnMainThread(() -> {
                 resultInfo.setText(packet.message);
-                unban.setVisibility(View.VISIBLE);
-                unban.setClickable(true);
+                get.setVisibility(View.VISIBLE);
+                get.setClickable(true);
             });
         });
 
@@ -115,9 +109,9 @@ public class UnbanFragment extends Fragment {
     private void error() {
         Device device = Device.getInstance();
         device.runOnMainThread(() -> {
-            unban.setVisibility(View.INVISIBLE);
-            unban.setClickable(false);
-            nick.setText("");
+            get.setVisibility(View.INVISIBLE);
+            get.setClickable(false);
+            number.setText("");
             resultInfo.setText("☢Произошла ошибка☢ ;(");
         });
     }
@@ -129,13 +123,12 @@ public class UnbanFragment extends Fragment {
             connection.disconnect();
         connection = null;
         resultInfo = null;
-        unban = null;
-        nick = null;
+        get = null;
+        number = null;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_unban, container, false);
+        return inflater.inflate(R.layout.fragment_room, container, false);
     }
-
 }

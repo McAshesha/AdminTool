@@ -47,6 +47,27 @@ public class AdminFragment extends Fragment {
                 adminController.popBackStack();
             adminController.navigate(R.id.action_adminEmptyFragment_to_unbanFragment);
         });
+
+        view.findViewById(R.id.player).setOnClickListener((OnClickListenerWithSound) l -> {
+            NavController adminController = device.findAdminNavController();
+            if (!device.isNowAdminViewHidden())
+                adminController.popBackStack();
+            adminController.navigate(R.id.action_adminEmptyFragment_to_playerFragment);
+        });
+
+        view.findViewById(R.id.room).setOnClickListener((OnClickListenerWithSound) l -> {
+            NavController adminController = device.findAdminNavController();
+            if (!device.isNowAdminViewHidden())
+                adminController.popBackStack();
+            adminController.navigate(R.id.action_adminEmptyFragment_to_roomFragment);
+        });
+
+        view.findViewById(R.id.info).setOnClickListener((OnClickListenerWithSound) l -> {
+            NavController adminController = device.findAdminNavController();
+            if (!device.isNowAdminViewHidden())
+                adminController.popBackStack();
+            adminController.navigate(R.id.action_adminEmptyFragment_to_findFragment);
+        });
     }
 
     @Override

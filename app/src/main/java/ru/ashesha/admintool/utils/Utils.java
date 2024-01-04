@@ -19,6 +19,14 @@ public class Utils {
         }
     }
 
+    public static String formatInfoPlayer(String msg) {
+        return msg.replace("[#D4161F]", "").replace("[#FF8600]", "")
+                .replace("[#ff0093]", "").replace("[#9E00FF]", "")
+                .replace("mail-", "Почта: ").replace("money-", "Монеты: ")
+                .replace("Процент-", "Процент: ").replace("Жалоб-", "Жалоб: ")
+                .replace("Похвал-", "Похвал: ");
+    }
+
     public interface Method {
         void apply();
     }
