@@ -52,7 +52,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
                 android:ems="12"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
@@ -129,7 +129,7 @@
             android:fontFamily="@font/minecraft"/>
 
     <Button
-            android:text="забанить"
+            android:text="заблокировать"
             android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
             android:visibility="invisible"
             android:textColor="#FFFFFF"
             android:clickable="false"
-            android:id="@+id/give"/>
+            android:id="@+id/ban"/>
 
     <TextView
             android:text=""

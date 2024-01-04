@@ -79,7 +79,6 @@ public class ComplaintFragment extends Fragment {
         });
 
         count.setOnItemSelectedListener((OnItemSelectedWithSound) (v, position, id) -> method.apply());
-
         nick.addTextChangedListener((OnTextChangeListener) l -> method.apply());
         other.addTextChangedListener((OnTextChangeListener) l -> method.apply());
 
@@ -118,7 +117,7 @@ public class ComplaintFragment extends Fragment {
         });
 
         connection.registerListenerPacket(NewMessageRegionChat.class, packet -> {
-            if (packet.author == null || !packet.author.equals("Admin"))
+            if (packet == null || packet.author == null || !packet.author.equals("Admin"))
                 return;
             connection.disconnect();
             Device device = Device.getInstance();
@@ -136,8 +135,9 @@ public class ComplaintFragment extends Fragment {
     private void error() {
         Device device = Device.getInstance();
         device.runOnMainThread(() -> {
-            give.setVisibility(View.VISIBLE);
-            give.setClickable(true);
+            give.setVisibility(View.INVISIBLE);
+            give.setClickable(false);
+            nick.setText("");
             resultInfo.setText("☢Произошла ошибка☢ ;(");
         });
     }
