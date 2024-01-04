@@ -15,4 +15,11 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+    <string-array name="period">
+        <item>сутки</item>
+        <item>неделя</item>
+        <item>месяц</item>
+        <item>навсегда</item>
+    </string-array>
 </resources>

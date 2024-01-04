@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,7 +31,14 @@ public class AdminFragment extends Fragment {
             NavController adminController = device.findAdminNavController();
             if (!device.isNowAdminViewHidden())
                 adminController.popBackStack();
-            adminController.navigate(R.id.action_adminEmptyFragment_to_complaintFragment2);
+            adminController.navigate(R.id.action_adminEmptyFragment_to_complaintFragment);
+        });
+
+        view.findViewById(R.id.ban).setOnClickListener((OnClickListenerWithSound) l -> {
+            NavController adminController = device.findAdminNavController();
+            if (!device.isNowAdminViewHidden())
+                adminController.popBackStack();
+            adminController.navigate(R.id.action_adminEmptyFragment_to_banFragment);
         });
     }
 

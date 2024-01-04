@@ -1,6 +1,9 @@
 package ru.ashesha.admintool.fragments.admin;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -8,24 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import org.jetbrains.annotations.NotNull;
 import ru.ashesha.admintool.R;
 import ru.ashesha.admintool.mo.Decoder;
 import ru.ashesha.admintool.mo.MafiaConnection;
 import ru.ashesha.admintool.mo.packets.client.EnterRegionChat;
 import ru.ashesha.admintool.mo.packets.client.Login;
-import ru.ashesha.admintool.mo.packets.client.OnlineFriend;
 import ru.ashesha.admintool.mo.packets.client.SendMessageToRegionChat;
 import ru.ashesha.admintool.mo.packets.server.NewMessageRegionChat;
 import ru.ashesha.admintool.mo.packets.server.ResultLogin;
-import ru.ashesha.admintool.mo.packets.server.ResultOnlineFriend;
 import ru.ashesha.admintool.utils.Device;
+import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 import ru.ashesha.admintool.utils.Device.OnItemSelectedWithSound;
 import ru.ashesha.admintool.utils.Device.OnTextChangeListener;
-import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 import ru.ashesha.admintool.utils.UserData;
 import ru.ashesha.admintool.utils.Utils.Method;
 
@@ -89,11 +87,17 @@ public class ComplaintFragment extends Fragment {
             give.setVisibility(View.INVISIBLE);
             give.setClickable(false);
             resultInfo.setText("");
-            EXECUTOR.execute(this::request);
+            EXECUTOR.execute(this::sendRequest);
+            EXECUTOR.execute(() -> {
+                sleep(10_000);
+                if (connection == null || resultInfo == null || give == null || other == null || nick == null || cause == null || count == null || !connection.connected() || !resultInfo.getText().toString().isEmpty())
+                    return;
+                error();
+            });
         });
     }
 
-    private void request() {
+    private void sendRequest() {
         connection = new MafiaConnection("http://mafiaonline.jcloud.kz");
         try {
             connection.connect();
@@ -114,10 +118,12 @@ public class ComplaintFragment extends Fragment {
         });
 
         connection.registerListenerPacket(NewMessageRegionChat.class, packet -> {
+            if (packet.author == null || !packet.author.equals("Admin"))
+                return;
             connection.disconnect();
             Device device = Device.getInstance();
             device.runOnMainThread(() -> {
-                resultInfo.setText("Все успешно выданы!");
+                resultInfo.setText(packet.message);
                 give.setVisibility(View.VISIBLE);
                 give.setClickable(true);
             });

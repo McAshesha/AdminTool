@@ -40,22 +40,18 @@ public class TopFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        pause();
+        if (connection != null)
+            connection.disconnect();
+        error();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Device.getInstance().getDataModel().removeInfo("top");
         connection = null;
         lines = null;
         title = null;
         list = null;
-    }
-
-    private void pause() {
-        if (connection != null)
-            connection.disconnect();
     }
 
 
@@ -82,12 +78,8 @@ public class TopFragment extends Fragment {
         EXECUTOR.execute(this::requestListTop);
         EXECUTOR.execute(() -> {
             sleep(10_000);
-            if (list == null || title == null || lines == null)
+            if (list == null || title == null || lines == null || !list.getText().toString().isEmpty())
                 return;
-            if (!list.getText().toString().isEmpty())
-                return;
-            if (connection != null)
-                connection.disconnect();
             error();
         });
     }
@@ -150,8 +142,10 @@ public class TopFragment extends Fragment {
     }
 
     private void error() {
-        pause();
+        if (connection != null)
+            connection.disconnect();
         Device device = Device.getInstance();
+        device.getDataModel().removeInfo("top");
         device.runOnMainThread(() -> title.setText("☢Произошла ошибка☢ ;("));
     }
 

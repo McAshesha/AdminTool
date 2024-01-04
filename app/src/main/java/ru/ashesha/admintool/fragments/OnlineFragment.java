@@ -91,7 +91,7 @@ public class OnlineFragment extends Fragment {
             title.setText("Проверить онлайн игрока");
             checkOnline.setVisibility(View.INVISIBLE);
             checkOnline.setClickable(false);
-            EXECUTOR.execute(this::requestOnline);
+            EXECUTOR.execute(this::sendRequestOnline);
         });
 
         addToFriend.setOnClickListener((OnClickListenerWithSound) v -> {
@@ -137,7 +137,7 @@ public class OnlineFragment extends Fragment {
         connection.sendPacket(new Login(data.getOnlineLogin(), data.getOnlinePassword(), data.getVersion()));
     }
 
-    private void requestOnline() {
+    private void sendRequestOnline() {
         connection = new MafiaConnection("http://mafiaonline.jcloud.kz");
         try {
             connection.connect();
