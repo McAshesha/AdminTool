@@ -146,7 +146,11 @@ public class TopFragment extends Fragment {
             connection.disconnect();
         Device device = Device.getInstance();
         device.getDataModel().removeInfo("top");
-        device.runOnMainThread(() -> title.setText("☢Произошла ошибка☢ ;("));
+        device.runOnMainThread(() -> {
+            title.setText("☢Произошла ошибка☢ ;(");
+            list.setText("");
+            list.setClickable(false);
+        });
     }
 
     @Override

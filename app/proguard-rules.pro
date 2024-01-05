@@ -1,21 +1,21 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
+# Добавьте сюда правила ProGuard для конкретного проекта.
+# Управлять набором прикладных файлов конфигурации можно с помощью
+# Настройка proguardFiles в build.gradle.
 #
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Более подробную информацию см.
+# http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
+# Если ваш проект использует WebView с JS, раскомментируйте следующее
+# и укажите полное имя класса в интерфейсе JavaScript
+# сорт:
+#-keepclassmembers класс fqcn.of.javascript.interface.for.webview {
+# публичный *;
 #}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Раскомментируйте это, чтобы сохранить информацию о номере строки для
+# отладка трассировки стека.
+#-keeppattributes SourceFile,LineNumberTable
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
+# Если вы сохраните информацию о номере строки, раскомментируйте ее, чтобы
+# скрыть исходное имя файла.
 #-renamesourcefileattribute SourceFile

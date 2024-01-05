@@ -5,10 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import ru.ashesha.admintool.mo.packets.Packet;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ResultTop extends Packet {
 
@@ -16,11 +13,10 @@ public class ResultTop extends Packet {
 
     @Override
     protected void parsePacket(JSONArray array) throws JSONException {
-
         for (int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
             top.add(new AbstractMap.SimpleEntry<>(object.getString("login"), object.getInt("mmr")));
         }
-
+        top.sort((first, second) -> second.getValue() - first.getValue());
     }
 }

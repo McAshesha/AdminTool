@@ -237,10 +237,10 @@ public class Device {
         default void onClick(View v) {
             MediaPlayer media = Device.getInstance().media;
             if (media != null && UserData.getInstance().isRealEnableSoundClick()) {
-                if (media.isPlaying()) {
-                    media.pause();
-                } else media.start();
-                media.seekTo(500);
+                if (media.isPlaying())
+                    media.stop();
+                media.seekTo(300);
+                media.start();
             }
             onClickWithSound(v);
         }

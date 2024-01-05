@@ -20,7 +20,7 @@
             android:id="@+id/topButton"/>
 
     <Button
-            android:text="проверить онлайн"
+            android:text="Данные кланов"
             android:layout_marginTop="10dp"
             android:textSize="17sp"
             android:layout_width="wrap_content"
@@ -29,6 +29,18 @@
             android:fontFamily="@font/minecraft"
             android:textColor="#FFFFFF"
             android:rotationY="-1"
+            android:id="@+id/clansButton"/>
+
+    <Button
+            android:text="проверка онлайн"
+            android:layout_marginTop="10dp"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/minecraft"
+            android:textColor="#FFFFFF"
+            android:rotation="1"
             android:id="@+id/onlineButton"/>
 
     <Button
@@ -40,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/minecraft"
-            android:rotation="1"
+            android:rotationY="1"
             android:id="@+id/adminButton"/>
 
     <Button
@@ -52,6 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/minecraft"
-            android:rotationY="1"
+            android:rotation="-1"
             android:id="@+id/settingsButton"/>
 </LinearLayout>

@@ -1,7 +1,9 @@
 package ru.ashesha.admintool;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import ru.ashesha.admintool.utils.Device;
@@ -14,8 +16,7 @@ public class MainActivity extends AppCompatActivity {
      * TODO: Добавить фрагмент декодера + энкодера
      * TODO: Добавить фрагмент сырого подключения с билдером пакетов
      * TODO: Добавить фрагмент топа классики
-     * TODO: Добавить фрагменты связанные с районами
-     * TODO: Добавить кнопку редирект на разработчика
+     * TODO: Добавить фрагменты связанные с районами и кланами !!!
      */
 
     @Override
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         Device device = Device.getInstance();
         device.loadNowActivity(this);
+
+        findViewById(R.id.contact).setOnClickListener(v -> openTelegramLink());
 
         SharedPreferences sharedPreferences = getSharedPreferences("AdminData", Context.MODE_PRIVATE);
         UserData data = UserData.getInstance();
@@ -44,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         data.setVersion(sharedPreferences.getString("version", ""));
         data.setEnableSoundClick(Boolean.parseBoolean(sharedPreferences.getString("enableSoundClick", "true")));
+    }
+
+    private void openTelegramLink() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/mcashesha"));
+        startActivity(intent);
     }
 
     @Override
@@ -75,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Device.getInstance().destroy();
+        System.out.println("HUUUUUUUUUUUi");
     }
 
 }
