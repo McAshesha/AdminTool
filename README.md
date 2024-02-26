@@ -1,11 +1,11 @@
 # AdminTool
 
-AdminTool is a private Android application designed as a tool for administrators of the "Mafia Online" game. It simplifies the management of various administrative functions. Upon launching the application, users are presented with the main page featuring four buttons for navigating to different sections: Top Players (displaying the list of top players for the current month), Check Online (verifying the online status of a player and sending friend requests), Admin Panel (providing admin tools), and Settings.
+AdminTool is a private Android application designed as a tool for administrators of the "Mafia Online" game. It simplifies the management of various administrative functions. Upon launching the application, users are presented with the main page featuring buttons for navigating to different sections. 
 
 ## Table of Contents
 
 - [Usage](#usage)
-- [Features](#features)
+- [Sections](#sections)
 - [Screenshots](#screenshots)
 - [License](#license)
 
@@ -19,9 +19,10 @@ AdminTool is a private Android application designed as a tool for administrators
 
 4. Use the intuitive interface to navigate between different sections and access admin tools.
 
-## Features
+## Sections
 
 - **Top Players**: View the list of top players for the current month.
+- **Clans Data**: View the list of all clans, sorted by your desires.
 - **Check Online**: Verify the online status of a player and send friend requests.
 - **Admin Panel**: Access various admin tools to manage the game efficiently.
 - **Settings**: Configure application settings and preferences.
@@ -32,7 +33,10 @@ AdminTool is a private Android application designed as a tool for administrators
 *Main Menu Section*
 
 ![Top Players](screenshots/top_players.jpg)
-*Top Players Section*
+*Clans Data Section*
+
+![Clans Data](screenshots/clans_data.jpg)
+*Clans Data Section*
 
 ![Check Online](screenshots/check_online.jpg)
 *Check Online Section*
