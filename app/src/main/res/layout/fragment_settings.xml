@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/minecraft"/>
 
@@ -49,7 +49,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="поиск топа -"
+                      android:text="топ/кланы -"
                       android:textSize="16sp"
                       android:textColor="#FFFFFF"
                       android:layout_marginEnd="5dp"

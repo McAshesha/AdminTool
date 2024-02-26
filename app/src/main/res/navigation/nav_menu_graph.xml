@@ -8,7 +8,11 @@
               android:label="fragment_invisible" tools:layout="@layout/fragment_invisible">
         <action android:id="@+id/action_invisibleFragment_to_menuTopFragment" app:destination="@id/menuTopFragment"
         />
+        <action android:id="@+id/action_invisibleFragment_to_menuClansFragment"
+                app:destination="@id/menuClansFragment"/>
     </fragment>
     <fragment android:id="@+id/menuTopFragment" android:name="ru.ashesha.admintool.fragments.menu.MenuTopFragment"
               android:label="fragment_menu_top" tools:layout="@layout/fragment_menu_top"/>
+    <fragment android:id="@+id/menuClansFragment" android:name="ru.ashesha.admintool.fragments.menu.MenuClansFragment"
+              android:label="fragment_menu_clans" tools:layout="@layout/fragment_menu_clans"/>
 </navigation>

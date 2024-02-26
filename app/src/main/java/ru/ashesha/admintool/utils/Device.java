@@ -6,8 +6,10 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextWatcher;
@@ -27,6 +29,8 @@ import ru.ashesha.admintool.R;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
+
+import static android.net.Uri.parse;
 
 public class Device {
 
@@ -75,7 +79,6 @@ public class Device {
             return;
         ClipData clipData = ClipData.newPlainText("text", textToCopy);
         clipboardManager.setPrimaryClip(clipData);
-        showToastBar("Скопировано в буфер обмена!");
     }
 
 
@@ -220,6 +223,11 @@ public class Device {
 
     public void runOnMainThread(Runnable runnable) {
         nowActivity.runOnUiThread(runnable);
+    }
+
+    public void openLink(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, parse(url));
+        nowActivity.startActivity(intent);
     }
 
 

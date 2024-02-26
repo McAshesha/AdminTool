@@ -6,11 +6,19 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
 import ru.ashesha.admintool.utils.Device;
 import ru.ashesha.admintool.utils.UserData;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    @Override
+    public void onBackPressed() {
+        NavController controller = Device.getInstance().findNavController();
+        if (!controller.popBackStack())
+            super.onBackPressed();
+    }
 
     /**
      * TODO: Добавить фрагмент декодера + энкодера
@@ -28,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         Device device = Device.getInstance();
         device.loadNowActivity(this);
 
-        findViewById(R.id.contact).setOnClickListener(v -> openTelegramLink());
+        String url = device.getResources().getString(R.string.supportLink);
+        findViewById(R.id.contact).setOnClickListener(v -> device.openLink(url));
 
         SharedPreferences sharedPreferences = getSharedPreferences("AdminData", Context.MODE_PRIVATE);
         UserData data = UserData.getInstance();
@@ -47,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         data.setVersion(sharedPreferences.getString("version", ""));
         data.setEnableSoundClick(Boolean.parseBoolean(sharedPreferences.getString("enableSoundClick", "true")));
-    }
-
-    private void openTelegramLink() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/mcashesha"));
-        startActivity(intent);
     }
 
     @Override

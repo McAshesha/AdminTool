@@ -25,13 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/minecraft"/>
 
     <LinearLayout android:orientation="vertical"
                   android:layout_gravity="center_horizontal"
-                  android:layout_margin="32dp"
+                  android:layout_margin="16dp"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
 
@@ -108,7 +108,7 @@
                   android:layout_gravity="center_horizontal"
                   android:layout_marginTop="16dp"
                   android:text=""
-                  android:textSize="10sp"
+                  android:textSize="26sp"
                   android:textColor="#FFFFFF"
                   android:rotationY="1"
                   android:id="@+id/wait"

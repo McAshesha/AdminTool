@@ -29,6 +29,7 @@ public class MainFragment extends Fragment {
         view.findViewById(R.id.settingsButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_settingsFragment));
         view.findViewById(R.id.onlineButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_onlineFragment));
         view.findViewById(R.id.adminButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_adminFragment));
+        view.findViewById(R.id.clansButton).setOnClickListener((OnClickListenerWithSound) v -> controller.navigate(R.id.action_mainFragment_to_clansFragment));
     }
 
     @Override

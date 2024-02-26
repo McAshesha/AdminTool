@@ -37,13 +37,6 @@ public class TopFragment extends Fragment {
     private MafiaConnection connection;
 
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (connection != null)
-            connection.disconnect();
-        error();
-    }
 
     @Override
     public void onDestroy() {
@@ -58,15 +51,14 @@ public class TopFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Device device = Device.getInstance();
         device.loadNowView(view);
+
         NavController controller = device.findNavController();
         title = view.findViewById(R.id.title);
         list = view.findViewById(R.id.listTop);
-        TextView back = view.findViewById(R.id.back);
 
-        back.setOnClickListener(v -> controller.popBackStack());
+        view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
 
         list.setOnClickListener(v -> {
             NavController menuController = device.findMenuNavController();
@@ -75,16 +67,16 @@ public class TopFragment extends Fragment {
             else menuController.popBackStack();
         });
 
-        EXECUTOR.execute(this::requestListTop);
+        EXECUTOR.execute(this::sendRequestListTop);
         EXECUTOR.execute(() -> {
             sleep(10_000);
-            if (list == null || title == null || lines == null || !list.getText().toString().isEmpty())
+            if (list == null || title == null || !list.getText().toString().isEmpty())
                 return;
             error();
         });
     }
 
-    private void requestListTop() {
+    private void sendRequestListTop() {
         connection = new MafiaConnection("http://mafiaonline.jcloud.kz");
         try {
             connection.connect();
@@ -101,40 +93,39 @@ public class TopFragment extends Fragment {
         });
 
         connection.registerListenerPacket(ResultTop.class, packet -> {
-            if (packet == null) {
-                error();
-                return;
-            }
+            if (packet != null) {
+                lines = new ArrayList<>();
+                OnlineFriend packetOnline = new OnlineFriend();
 
-            lines = new ArrayList<>();
-            OnlineFriend packetOnline = new OnlineFriend();
+                for (int i = 1; i <= 50; i++) {
+                    Map.Entry<String, Integer> entry = packet.top.get(i - 1);
+                    lines.add(i + ". " + entry.getKey() + " " + entry.getValue() + " - ");
+                    packetOnline.addNick(entry.getKey());
+                }
 
-            for (int i = 1; i <= 20; i ++) {
-                Map.Entry<String, Integer> entry = packet.top.get(i - 1);
-                lines.add(i + ". " + entry.getKey() + " " + entry.getValue() + " - ");
-                packetOnline.addNick(entry.getKey());
-            }
-
-            connection.sendPacket(packetOnline);
+                connection.sendPacket(packetOnline);
+            } else error();
         });
 
         connection.registerListenerPacket(ResultOnlineFriend.class, packet -> {
-            connection.disconnect();
+            if (packet != null) {
+                connection.disconnect();
 
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < 20; i ++) {
-                String online = packet.onlines.get(i) ? "онлайн\n" : "оффлайн\n";
-                lines.set(i, lines.get(i) + online);
-                result.append(lines.get(i));
-            }
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < 50; i++) {
+                    String online = packet.onlines.get(i) ? "онлайн\n" : "оффлайн\n";
+                    lines.set(i, lines.get(i) + online);
+                    result.append(lines.get(i));
+                }
 
-            Device device = Device.getInstance();
-            device.getDataModel().putInfo("top", new ArrayList<>(lines));
-            device.runOnMainThread(() -> {
-                title.setText("Список топа игроков:");
-                list.setText(result);
-                list.setClickable(true);
-            });
+                Device device = Device.getInstance();
+                device.getDataModel().putInfo("top", new ArrayList<>(lines).subList(0, 10));
+                device.runOnMainThread(() -> {
+                    title.setText("Список топа игроков");
+                    list.setText(result);
+                    list.setClickable(true);
+                });
+            } else error();
         });
 
         UserData data = UserData.getInstance();

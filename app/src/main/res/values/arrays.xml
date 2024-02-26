@@ -8,6 +8,17 @@
         <item>другое</item>
     </string-array>
 
+    <string-array name="tableClans">
+        <item>КЛАН</item>
+        <item>ЛИДЕР</item>
+        <item>УРОВЕНЬ</item>
+        <item>ИГРОКИ</item>
+        <item>СЛАВА</item>
+        <item>ПРЕДМЕТЫ</item>
+        <item>РАЙОН</item>
+        <item>КВ</item>
+    </string-array>
+
     <string-array name="count">
         <item>1</item>
         <item>2</item>
@@ -21,5 +32,12 @@
         <item>неделя</item>
         <item>месяц</item>
         <item>навсегда</item>
+    </string-array>
+
+    <string-array name="sort">
+        <item>уровню</item>
+        <item>игрокам</item>
+        <item>району</item>
+        <item>кв</item>
     </string-array>
 </resources>

@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context=".fragments.menu.MenuTopFragment"
+        tools:context=".fragments.menu.MenuClansFragment"
         android:background="#303030"
         android:orientation="vertical">
 
@@ -25,7 +25,7 @@
                 android:fontFamily="@font/minecraft"/>
 
         <TextView
-                android:text="Кого скопировать?)"
+                android:text="Что скопировать?)"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
