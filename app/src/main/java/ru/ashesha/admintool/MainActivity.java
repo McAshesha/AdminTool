@@ -1,9 +1,7 @@
 package ru.ashesha.admintool;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -24,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
      * TODO: Добавить фрагмент декодера + энкодера
      * TODO: Добавить фрагмент сырого подключения с билдером пакетов
      * TODO: Добавить фрагмент топа классики
-     * TODO: Добавить фрагменты связанные с районами и кланами !!!
+     * TODO: Внедрить ПРОКСИ
      */
 
     @Override

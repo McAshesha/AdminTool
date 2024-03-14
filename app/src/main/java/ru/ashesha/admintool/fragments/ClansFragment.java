@@ -24,6 +24,7 @@ import ru.ashesha.admintool.utils.Device;
 import ru.ashesha.admintool.utils.Device.OnClickListenerWithSound;
 import ru.ashesha.admintool.utils.Device.OnItemSelectedWithSound;
 import ru.ashesha.admintool.utils.UserData;
+import ru.ashesha.admintool.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,12 +32,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static java.lang.Integer.parseInt;
-import static ru.ashesha.admintool.utils.Utils.EXECUTOR;
-import static ru.ashesha.admintool.utils.Utils.sleep;
+import static ru.ashesha.admintool.utils.Utils.*;
 
 public class ClansFragment extends Fragment {
 
@@ -133,12 +134,12 @@ public class ClansFragment extends Fragment {
             if (packet != null) {
                 connection.disconnect();
                 this.clans = packet.clans;
+                updateTableClans();
                 Device.getInstance().runOnMainThread(() -> {
                     title.setText("Информация по кланам");
                     arrow.setClickable(true);
                     layoutSort.setVisibility(View.VISIBLE);
                 });
-                updateTableClans();
             } else error();
         });
 
@@ -154,25 +155,34 @@ public class ClansFragment extends Fragment {
         Typeface typeText = title.getTypeface();
         clans.sort(comparatorNow);
 
-        Function<String, TextView> createTextView = value -> {
-            TextView textView = new TextView(getContext());
-            textView.setTypeface(typeText);
-            textView.setTextColor(Color.WHITE);
-            textView.setPadding(5, 5, 5, 5);
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextSize(8);
-            textView.setText(value);
-            return textView;
+        Function<String, TextView> textView = value -> {
+            TextView view = new TextView(getContext());
+            view.setTypeface(typeText);
+            view.setRotation(RANDOM.nextFloat() * 1.5f - 0.75f);
+            view.setRotationY(RANDOM.nextFloat() * 1.5f - 0.75f);
+            view.setTextColor(Color.WHITE);
+            view.setPadding(5, 5, 5, 5);
+            view.setGravity(Gravity.CENTER);
+            view.setTextSize(8);
+            view.setText(value);
+            return view;
+        };
+
+        Supplier<TableRow> tableRow = () -> {
+            TableRow row = new TableRow(getContext());
+            row.setLayoutParams(new TableLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+            row.setRotation(RANDOM.nextFloat() * 1.5f - 0.75f);
+            row.setRotationY(RANDOM.nextFloat() * 1.5f - 0.75f);
+            return row;
         };
 
         List<String> dataClans = new ArrayList<>();
         device.runOnMainThread(() -> {
             tableClans.removeAllViews();
 
-            TableRow firstRow = new TableRow(getContext());
-            firstRow.setLayoutParams(new TableRow.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+            TableRow firstRow = tableRow.get();
             for (String value : array)
-                firstRow.addView(createTextView.apply(value));
+                firstRow.addView(textView.apply(value));
             tableClans.addView(firstRow);
 
             TableRow secondRow = new TableRow(getContext());
@@ -182,9 +192,7 @@ public class ClansFragment extends Fragment {
             AtomicInteger count = new AtomicInteger();
 
             clans.forEach(clan -> {
-                TableRow row = new TableRow(getContext());
-                row.setLayoutParams(new TableRow.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-
+                TableRow row = tableRow.get();
                 StringBuilder stringTable = new StringBuilder();
                 for (int i = 0; i < clan.length; i ++) {
                     String value = clan[i];
@@ -194,12 +202,12 @@ public class ClansFragment extends Fragment {
                     } else if (i == 6 || i == 7)
                         value = value.isEmpty() ? "нет" : value;
 
-                    row.addView(createTextView.apply(value));
+                    row.addView(textView.apply(value));
                     stringTable.append(value + " ");
                 }
 
                 if (count.getAndIncrement() < 10)
-                    dataClans.add(stringTable.substring(0, stringTable.length() - 1) + "\n");
+                    dataClans.add(stringTable.deleteCharAt(stringTable.length() - 1) + "\n");
                 tableClans.addView(row);
             });
 
