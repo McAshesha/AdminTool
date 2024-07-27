@@ -38,13 +38,13 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Инструмент админа"
+            android:text="Инструмент администратора"
             android:textSize="20sp"
             android:textColor="#B6B6B6"
             android:gravity="center"
             android:fontFamily="@font/minecraft"
             android:layout_marginTop="14dp"/>
-    <TextView
+    <!--<TextView
             android:layout_below="@id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:textSize="10sp"
             android:textColor="#B6B6B6"
             android:layout_marginTop="5dp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"/>-->
 
     <TextView
             android:id="@+id/contact"

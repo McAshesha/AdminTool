@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,10 +33,10 @@ import static ru.ashesha.admintool.utils.Utils.sleep;
 public class TopFragment extends Fragment {
 
     private TextView title, list;
+    private EditText searchNick;
 
     private List<String> lines;
     private MafiaConnection connection;
-
 
 
     @Override
@@ -45,6 +46,7 @@ public class TopFragment extends Fragment {
         lines = null;
         title = null;
         list = null;
+        searchNick = null;
     }
 
 
@@ -57,8 +59,14 @@ public class TopFragment extends Fragment {
         NavController controller = device.findNavController();
         title = view.findViewById(R.id.title);
         list = view.findViewById(R.id.listTop);
+        searchNick = view.findViewById(R.id.searchNick);
 
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
+        searchNick.addTextChangedListener((Device.OnTextChangeListener) str -> {
+            StringBuilder builder = new StringBuilder();
+            lines.stream().filter(line -> line.contains(str)).forEach(builder::append);
+            list.setText(builder);
+        });
 
         list.setOnClickListener(v -> {
             NavController menuController = device.findMenuNavController();
@@ -70,7 +78,7 @@ public class TopFragment extends Fragment {
         EXECUTOR.execute(this::sendRequestListTop);
         EXECUTOR.execute(() -> {
             sleep(10_000);
-            if (list == null || title == null || !list.getText().toString().isEmpty())
+            if (searchNick == null || list == null || title == null || !list.getText().toString().isEmpty())
                 return;
             error();
         });
@@ -97,7 +105,7 @@ public class TopFragment extends Fragment {
                 lines = new ArrayList<>();
                 OnlineFriend packetOnline = new OnlineFriend();
 
-                for (int i = 1; i <= 50; i++) {
+                for (int i = 1; i <= 1000; i++) {
                     Map.Entry<String, Integer> entry = packet.top.get(i - 1);
                     lines.add(i + ". " + entry.getKey() + " " + entry.getValue() + " - ");
                     packetOnline.addNick(entry.getKey());
@@ -112,14 +120,14 @@ public class TopFragment extends Fragment {
                 connection.disconnect();
 
                 StringBuilder result = new StringBuilder();
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 1000; i++) {
                     String online = packet.onlines.get(i) ? "онлайн\n" : "оффлайн\n";
                     lines.set(i, lines.get(i) + online);
                     result.append(lines.get(i));
                 }
 
                 Device device = Device.getInstance();
-                device.getDataModel().putInfo("top", new ArrayList<>(lines).subList(0, 10));
+                device.getDataModel().putInfo("top", new ArrayList<>(lines).subList(0, 50));
                 device.runOnMainThread(() -> {
                     title.setText("Список топа игроков");
                     list.setText(result);

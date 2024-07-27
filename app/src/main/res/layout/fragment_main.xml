@@ -8,7 +8,7 @@
               android:orientation="vertical">
 
     <Button
-            android:text="топ игроков"
+            android:text="статистика игроков"
             android:layout_marginTop="100dp"
             android:textSize="17sp"
             android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
             android:id="@+id/topButton"/>
 
     <Button
-            android:text="Данные кланов"
+            android:text="статистика кланов"
             android:layout_marginTop="10dp"
             android:textSize="17sp"
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:id="@+id/clansButton"/>
 
     <Button
-            android:text="проверка онлайн"
+            android:text="проверка на онлайн"
             android:layout_marginTop="10dp"
             android:textSize="17sp"
             android:layout_width="wrap_content"

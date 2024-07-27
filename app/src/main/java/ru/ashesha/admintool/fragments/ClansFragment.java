@@ -171,8 +171,8 @@ public class ClansFragment extends Fragment {
         Supplier<TableRow> tableRow = () -> {
             TableRow row = new TableRow(getContext());
             row.setLayoutParams(new TableLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-            row.setRotation(RANDOM.nextFloat() * 1.5f - 0.75f);
-            row.setRotationY(RANDOM.nextFloat() * 1.5f - 0.75f);
+            row.setRotation(RANDOM.nextFloat() - 0.7f);
+            row.setRotationY(RANDOM.nextFloat() - 0.5f);
             return row;
         };
 
