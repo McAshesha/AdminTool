@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ import ru.ashesha.admintool.utils.UserData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static ru.ashesha.admintool.utils.Utils.EXECUTOR;
 import static ru.ashesha.admintool.utils.Utils.sleep;
@@ -34,6 +36,7 @@ public class TopFragment extends Fragment {
 
     private TextView title, list;
     private EditText searchNick;
+    private LinearLayout layoutSearch;
 
     private List<String> lines;
     private MafiaConnection connection;
@@ -42,11 +45,13 @@ public class TopFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Device.getInstance().getDataModel().removeInfo("top");
         connection = null;
         lines = null;
         title = null;
         list = null;
         searchNick = null;
+        layoutSearch = null;
     }
 
 
@@ -60,11 +65,14 @@ public class TopFragment extends Fragment {
         title = view.findViewById(R.id.title);
         list = view.findViewById(R.id.listTop);
         searchNick = view.findViewById(R.id.searchNick);
+        layoutSearch = view.findViewById(R.id.layoutSearch);
 
         view.findViewById(R.id.back).setOnClickListener(v -> controller.popBackStack());
         searchNick.addTextChangedListener((Device.OnTextChangeListener) str -> {
             StringBuilder builder = new StringBuilder();
-            lines.stream().filter(line -> line.contains(str)).forEach(builder::append);
+            List<String> result = lines.stream().filter(line -> line.contains(str)).collect(Collectors.toList());
+            result.forEach(builder::append);
+            device.getDataModel().putInfo("top", result.subList(0, Math.min(50, result.size())));
             list.setText(builder);
         });
 
@@ -78,7 +86,7 @@ public class TopFragment extends Fragment {
         EXECUTOR.execute(this::sendRequestListTop);
         EXECUTOR.execute(() -> {
             sleep(10_000);
-            if (searchNick == null || list == null || title == null || !list.getText().toString().isEmpty())
+            if (layoutSearch == null || searchNick == null || list == null || title == null || !list.getText().toString().isEmpty())
                 return;
             error();
         });
@@ -132,6 +140,7 @@ public class TopFragment extends Fragment {
                     title.setText("Список топа игроков");
                     list.setText(result);
                     list.setClickable(true);
+                    layoutSearch.setVisibility(View.VISIBLE);
                 });
             } else error();
         });
@@ -149,6 +158,7 @@ public class TopFragment extends Fragment {
             title.setText("☢Произошла ошибка☢ ;(");
             list.setText("");
             list.setClickable(false);
+            layoutSearch.setVisibility(View.INVISIBLE);
         });
     }
 

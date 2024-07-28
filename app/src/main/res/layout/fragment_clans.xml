@@ -36,6 +36,37 @@
                   android:layout_height="match_parent">
 
         <LinearLayout android:orientation="horizontal"
+                      android:visibility="invisible"
+                      android:id="@+id/layoutSearch"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="найти:"
+                      android:textSize="16sp"
+                      android:textColor="#FFFFFF"
+                      android:layout_marginEnd="6dp"
+                      android:fontFamily="@font/minecraft"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="8"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8E8E8E"
+                    android:backgroundTint="#4A4A4A"
+                    android:textAlignment="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/feature"
+                    android:hint="черта"
+                    android:fontFamily="@font/minecraft"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
                       android:layout_width="wrap_content"
                       android:rotation="-1"
                       android:visibility="invisible"
@@ -80,6 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="false"
+                android:visibility="invisible"
                 android:id="@+id/tableClans"/>
 
         </HorizontalScrollView>

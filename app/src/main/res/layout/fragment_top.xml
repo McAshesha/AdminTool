@@ -34,7 +34,8 @@
                   android:layout_height="match_parent">
 
     <LinearLayout android:orientation="horizontal"
-                  android:layout_marginLeft="10dp"
+                  android:visibility="invisible"
+                  android:id="@+id/layoutSearch"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content">
 
@@ -58,7 +59,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:id="@+id/searchNick"
-                android:hint="ник"
+                android:hint="черта"
                 android:fontFamily="@font/minecraft"/>
 
     </LinearLayout>

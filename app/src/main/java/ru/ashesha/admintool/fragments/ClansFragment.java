@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -42,12 +43,16 @@ import static ru.ashesha.admintool.utils.Utils.*;
 public class ClansFragment extends Fragment {
 
     private MafiaConnection connection;
+    private EditText feature;
     private TextView arrow, title;
     private Spinner sort;
-    private LinearLayout layoutSort;
+    private LinearLayout layoutSort, layoutSearch;
     private TableLayout tableClans;
+
     private List<String[]> clans;
     private int multiplySort = 1, position = 0;
+
+    private TextView[][] textTable;
 
     private final List<Comparator<String[]>> comparators = new ArrayList<>(Arrays.asList(
             (first, second) -> parseInt(second[2]) - parseInt(first[2]),
@@ -71,6 +76,7 @@ public class ClansFragment extends Fragment {
     };
 
 
+
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -84,7 +90,11 @@ public class ClansFragment extends Fragment {
         sort = view.findViewById(R.id.sort);
         title = view.findViewById(R.id.title);
         layoutSort = view.findViewById(R.id.layoutSort);
+        layoutSearch = view.findViewById(R.id.layoutSearch);
         tableClans = view.findViewById(R.id.tableClans);
+        feature = view.findViewById(R.id.feature);
+
+        feature.addTextChangedListener((Device.OnTextChangeListener) str -> updateTableClans());
 
         tableClans.setOnClickListener(v -> {
             NavController menuController = device.findMenuNavController();
@@ -108,7 +118,7 @@ public class ClansFragment extends Fragment {
         EXECUTOR.execute(this::sendRequestList);
         EXECUTOR.execute(() -> {
             sleep(10_000);
-            if (tableClans == null || title == null || arrow == null || sort == null || layoutSort == null || tableClans.getChildCount() != 0)
+            if (feature == null || tableClans == null || title == null || arrow == null || sort == null || layoutSearch == null || layoutSort == null || tableClans.getChildCount() != 0)
                 return;
             error();
         });
@@ -134,11 +144,14 @@ public class ClansFragment extends Fragment {
             if (packet != null) {
                 connection.disconnect();
                 this.clans = packet.clans;
-                updateTableClans();
+                createTableClans();
                 Device.getInstance().runOnMainThread(() -> {
+                    updateTableClans();
                     title.setText("Информация по кланам");
                     arrow.setClickable(true);
+                    tableClans.setVisibility(View.VISIBLE);
                     layoutSort.setVisibility(View.VISIBLE);
+                    layoutSearch.setVisibility(View.VISIBLE);
                 });
             } else error();
         });
@@ -147,15 +160,14 @@ public class ClansFragment extends Fragment {
         connection.sendPacket(new Login(data.getTopLogin(), data.getTopPassword(), data.getVersion()));
     }
 
-    private void updateTableClans() {
+    private void createTableClans() {
         if (clans == null)
             return;
         Device device = Device.getInstance();
         String[] array = device.getResources().getStringArray(R.array.tableClans);
         Typeface typeText = title.getTypeface();
-        clans.sort(comparatorNow);
 
-        Function<String, TextView> textView = value -> {
+        Function<String, TextView> textView = (value) -> {
             TextView view = new TextView(getContext());
             view.setTypeface(typeText);
             view.setRotation(RANDOM.nextFloat() * 1.5f - 0.75f);
@@ -167,53 +179,79 @@ public class ClansFragment extends Fragment {
             view.setText(value);
             return view;
         };
-
         Supplier<TableRow> tableRow = () -> {
             TableRow row = new TableRow(getContext());
             row.setLayoutParams(new TableLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-            row.setRotation(RANDOM.nextFloat() - 0.7f);
+            row.setRotation(RANDOM.nextFloat() - 0.5f);
             row.setRotationY(RANDOM.nextFloat() - 0.5f);
             return row;
         };
 
-        List<String> dataClans = new ArrayList<>();
+        textTable = new TextView[clans.size()][];
+
         device.runOnMainThread(() -> {
             tableClans.removeAllViews();
-
-            TableRow firstRow = tableRow.get();
+            TableRow row = tableRow.get();
             for (String value : array)
-                firstRow.addView(textView.apply(value));
-            tableClans.addView(firstRow);
+                row.addView(textView.apply(value));
+            tableClans.addView(row);
 
-            TableRow secondRow = new TableRow(getContext());
-            secondRow.addView(new TextView(getContext()));
-            tableClans.addView(secondRow);
+            row = new TableRow(getContext());
+            row.addView(new TextView(getContext()));
+            tableClans.addView(row);
 
-            AtomicInteger count = new AtomicInteger();
+            for (int i = 0; i < textTable.length; i ++) {
 
-            clans.forEach(clan -> {
-                TableRow row = tableRow.get();
-                StringBuilder stringTable = new StringBuilder();
-                for (int i = 0; i < clan.length; i ++) {
-                    String value = clan[i];
-                    if (i == 5) {
-                        int length = value.length();
-                        value = length == 0 ? "нет" : length == 5 ? "все" : "есть";
-                    } else if (i == 6 || i == 7)
-                        value = value.isEmpty() ? "нет" : value;
+                textTable[i] = new TextView[array.length];
+                String[] clan = clans.get(i);
+                row = tableRow.get();
 
-                    row.addView(textView.apply(value));
-                    stringTable.append(value + " ");
+                for (int j = 0; j < textTable[i].length; j ++) {
+                    textTable[i][j] = textView.apply("");
+                    row.addView(textTable[i][j]);
+
+                    if (j == 5) {
+                        int length = clan[j].length();
+                        clan[j] = length == 0 ? "нет" : length == 5 ? "все" : "есть";
+                    } else if (j == 6 || j == 7)
+                        clan[j] = clan[j].isEmpty() ? "нет" : clan[j];
                 }
 
-                if (count.getAndIncrement() < 10)
-                    dataClans.add(stringTable.deleteCharAt(stringTable.length() - 1) + "\n");
                 tableClans.addView(row);
-            });
 
-            device.getDataModel().putInfo("clans", dataClans);
-            tableClans.setClickable(true);
+            }
         });
+    }
+
+    private void updateTableClans() {
+        if (clans == null || clans.isEmpty())
+            return;
+
+        Device device = Device.getInstance();
+        List<String[]> clans = this.clans.stream().filter(clan -> Arrays.stream(clan)
+                .anyMatch(feat -> feat.contains(feature.getText()))).sorted(comparatorNow).collect(Collectors.toList());
+        List<String> dataClans = new ArrayList<>();
+        int count = 0;
+
+        for (int i = 0; i < clans.size(); i ++) {
+
+            String[] clan = clans.get(i);
+            StringBuilder strRow = new StringBuilder();
+            for (int j = 0; j < clan.length; j ++) {
+                textTable[i][j].setText(clan[j]);
+                strRow.append(clan[j] + " ");
+            }
+            if (count ++ < 10)
+                dataClans.add(strRow.deleteCharAt(strRow.length() - 1) + "\n");
+
+        }
+
+        for (int i = count; i < textTable.length; i ++)
+            for (int j = 0; j < textTable[i].length; j ++)
+                textTable[i][j].setText("");
+
+        device.getDataModel().putInfo("clans", dataClans);
+        tableClans.setClickable(true);
     }
 
     private void error() {
@@ -227,19 +265,25 @@ public class ClansFragment extends Fragment {
             tableClans.removeAllViews();
             arrow.setClickable(false);
             layoutSort.setVisibility(View.INVISIBLE);
+            tableClans.setVisibility(View.INVISIBLE);
+            layoutSearch.setVisibility(View.INVISIBLE);
         });
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Device.getInstance().getDataModel().removeInfo("clans");
         connection = null;
         sort = null;
         arrow = null;
         layoutSort = null;
+        layoutSearch = null;
         title = null;
         tableClans = null;
         clans = null;
+        feature = null;
+        textTable = null;
     }
 
     @Override
