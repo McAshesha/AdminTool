@@ -6,11 +6,7 @@ import org.json.JSONObject;
 import ru.ashesha.admintool.mo.packets.Packet;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-;
 
 public class getClansTopResult extends Packet {
     public List<String[]> clans = new ArrayList<>();

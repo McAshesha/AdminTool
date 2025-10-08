@@ -1,6 +1,7 @@
 package ru.ashesha.admintool.mo.packets.client;
 
 
+import java.util.HashMap;
 import ru.ashesha.admintool.mo.packets.Packet;
 import ru.ashesha.admintool.utils.Device;
 
@@ -9,6 +10,8 @@ public class Login extends Packet {
     final String login, password, version, i, o,
             p1, p2, m1, m2, steamId;
     final boolean me, color, isUsePassword;
+
+    final HashMap<String, Long> sand;
 
 
     public Login(String login, String password, String version) {
@@ -39,6 +42,9 @@ public class Login extends Packet {
             this.p1 = device.getLoginP1();
             this.p2 = device.getLoginP2();
         }
+        this.sand = new HashMap<>();
+        sand.put("v", System.currentTimeMillis());
+        sand.put("b", System.nanoTime());
     }
 
 }
