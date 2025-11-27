@@ -1,17 +1,19 @@
 package ru.ashesha.admintool.mo.packets.client;
 
 
-import java.util.HashMap;
+import org.json.JSONException;
+import org.json.JSONObject;
 import ru.ashesha.admintool.mo.packets.Packet;
 import ru.ashesha.admintool.utils.Device;
 
 public class Login extends Packet {
 
-    final String login, password, version, i, o,
-            p1, p2, m1, m2, steamId;
+    final String login, password, i, o,
+            p1, p2, m1, m2, steamId, IM;
     final boolean me, color, isUsePassword;
+    final String version;
 
-    final HashMap<String, Long> sand;
+    final JSONObject sand;
 
 
     public Login(String login, String password, String version) {
@@ -23,17 +25,26 @@ public class Login extends Packet {
         this.login = login;
         this.password = password;
         this.version = version;
-        this.me = false;
-        this.color = false;
         this.isUsePassword = true;
-        this.o = "2068136186";
+        this.color = false;
+        this.sand = new JSONObject();
+        try {
+            sand.put("v", System.currentTimeMillis());
+            sand.put("b", System.nanoTime());
+        }
+        catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        this.me = false;
+        this.o = "186712752";
         this.steamId = "";
         if (fakeData) {
-            this.i = "3a21e098c5e64ee2 ! com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME ! null ! http://www.google.com http://www.google.co.uk ! DSDGS-KM20 ! PRO-KM20 ! unknown";
+            this.i = "fabf52b175038b51 ! com.touchtype.swiftkey/com.touchtype.KeyboardService ! null ! null ! HUAWEIELS-N39 ! ELS-N39 ! unknown";
             this.m1 = "08:43:27:C7:E6:7F";
             this.m2 = "";
             this.p1 = "172.16.64.15";
             this.p2 = "FE80::SDG:27FF:FE1C:607F";
+            this.IM = "957dfa23-608d-4276-a7f5-566cfd7e7521 | android.telephony.TelephonyManager@d473f75";
         } else {
             Device device = Device.getInstance();
             this.i = device.getLoginI();
@@ -41,10 +52,8 @@ public class Login extends Packet {
             this.m2 = device.getLoginM2();
             this.p1 = device.getLoginP1();
             this.p2 = device.getLoginP2();
+            this.IM = device.getPhoneInfo();
         }
-        this.sand = new HashMap<>();
-        sand.put("v", System.currentTimeMillis());
-        sand.put("b", System.nanoTime());
     }
 
 }

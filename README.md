@@ -1,6 +1,6 @@
-# AdminTool
+# admin-tool
 
-AdminTool is a private Android application designed as a tool for administrators of the "Mafia Online" game. It simplifies the management of various administrative functions. Upon launching the application, users are presented with the main page featuring buttons for navigating to different sections. 
+admin-tool is a private Android application designed as a tool for administrators of the "Mafia Online" game. It simplifies the management of various administrative functions. Upon launching the application, users are presented with the main page featuring buttons for navigating to different sections. 
 
 ## Table of Contents
 
@@ -11,11 +11,11 @@ AdminTool is a private Android application designed as a tool for administrators
 
 ## Usage
 
-1. Download the AdminTool APK from the [release page](https://github.com/McAshesha/AdminTool/releases).
+1. Download the admin-tool APK from the [release page](https://github.com/McAshesha/admin-tool/releases).
 
 2. Install the APK on your Android device.
 
-3. Open the AdminTool application.
+3. Open the admin-tool application.
 
 4. Use the intuitive interface to navigate between different sections and access admin tools.
 
@@ -49,6 +49,6 @@ AdminTool is a private Android application designed as a tool for administrators
 
 ## License
 
-AdminTool is distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+admin-tool is distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
-Feel free to contribute or report issues by creating pull requests or submitting bug reports. Enjoy using AdminTool for streamlined administration in "Mafia Online"!
+Feel free to contribute or report issues by creating pull requests or submitting bug reports. Enjoy using admin-tool for streamlined administration in "Mafia Online"!

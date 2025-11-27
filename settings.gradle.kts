@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AdminTool"
+rootProject.name = "admin-tool"
 include(":app")
- 

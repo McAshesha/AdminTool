@@ -24,11 +24,13 @@ import androidx.navigation.Navigation;
 import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONException;
 import org.json.JSONObject;
+import ru.ashesha.admintool.MainActivity;
 import ru.ashesha.admintool.R;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
+import java.util.UUID;
 
 import static android.net.Uri.parse;
 
@@ -82,6 +84,14 @@ public class Device {
     }
 
 
+
+    public String getPhoneInfo() {
+        try {
+            return UUID.randomUUID().toString() + " | " + nowActivity.getSystemService(Context.TELEPHONY_SERVICE);
+        } catch (Exception e8) {
+            return e8.toString();
+        }
+    }
 
     public String getLoginI() {
         try {

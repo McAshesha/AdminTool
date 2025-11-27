@@ -104,6 +104,7 @@ public class TopFragment extends Fragment {
         connection.registerListenerPacket(ResultLogin.class, packet -> {
             if (packet != null) {
                 Decoder.lfm = packet.wait;
+                System.out.println(packet.login + " " + packet.wait + " " + packet.password);
                 connection.sendPacket(new Top());
             } else error();
         });

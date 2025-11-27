@@ -3,51 +3,100 @@ package ru.ashesha.admintool.mo;
 import io.socket.client.Ack;
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import okhttp3.ConnectionSpec;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import ru.ashesha.admintool.mo.packets.Packet;
+import okhttp3.Authenticator;
 
+import java.io.IOException;
 import java.net.*;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MafiaConnection {
 
+    public enum ProxyType {
+        HTTP(Proxy.Type.HTTP),
+        SOCKS(Proxy.Type.SOCKS);
+
+        final Proxy.Type nativeType;
+
+        ProxyType(Proxy.Type proxyType) {
+            this.nativeType = proxyType;
+        }
+    }
+
     private final Socket socket;
 
 
-    public MafiaConnection(String host, String proxyHost, int proxyPort, String proxyLogin, String proxyPassword) {
+    public MafiaConnection(String host, String proxyHost, int proxyPort, String proxyLogin, String proxyPassword, ProxyType type) {
 
+        Proxy proxy = new Proxy(
+            type.nativeType,
+            new InetSocketAddress(proxyHost, proxyPort)
+        );
         IO.Options options = new IO.Options();
-        options.proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
-        /*options.proxyLogin = proxyLogin;
-        options.proxyPassword = proxyPassword;*/
-        Authenticator.setDefault(new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(proxyLogin, proxyPassword.toCharArray());
-            }
-        });
+        OkHttpClient client = new OkHttpClient.Builder()
+            .connectionSpecs(Collections.singletonList(ConnectionSpec.CLEARTEXT))
+            .proxy(proxy)
+            .proxyAuthenticator((route, response) -> {
+                String credential = Credentials.basic(proxyLogin, proxyPassword);
+                return response.request().newBuilder()
+                    .header("Proxy-Authorization", credential)
+                    .build();
+            })
+            .build();
+
+        options.path = "/new";
+        options.callFactory = client;
+        options.webSocketFactory = client;
         options.timeout = 30000;
         options.reconnection = false;
         socket = IO.socket(URI.create(host), options);
 
     }
 
-    public MafiaConnection(String host, String proxyHost, int proxyPort) {
+    public MafiaConnection(String host, String proxyHost, int proxyPort, ProxyType type) {
 
+        Proxy proxy = new Proxy(
+            type.nativeType,
+            new InetSocketAddress(proxyHost, proxyPort)
+        );
+        OkHttpClient client = new OkHttpClient.Builder()
+            .connectionSpecs(Collections.singletonList(ConnectionSpec.CLEARTEXT))
+            .proxy(proxy)
+            .build();
         IO.Options options = new IO.Options();
-        options.proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
-        options.timeout = 30000;
+
+        options.timeout = 30000L;
         options.reconnection = false;
+        options.path = "/new";
+        options.callFactory = client;
+        options.webSocketFactory = client;
+
         socket = IO.socket(URI.create(host), options);
 
     }
 
     public MafiaConnection(String host) {
 
+        OkHttpClient client = new OkHttpClient.Builder()
+            .connectionSpecs(Collections.singletonList(ConnectionSpec.CLEARTEXT))
+            .build();
         IO.Options options = new IO.Options();
+
         options.timeout = 30000;
         options.reconnection = false;
+        options.path = "/new";
+        options.callFactory = client;
+        options.webSocketFactory = client;
+
         socket = IO.socket(URI.create(host), options);
 
     }
@@ -55,6 +104,7 @@ public class MafiaConnection {
     public void sendPacket(Packet packet) {
 
         Object json = Decoder.encode(packet.convertToJSON());
+
         if (json == null)
             socket.emit(packet.getName());
         else if (packet.getName().equals("OutFromClan"))
@@ -125,8 +175,7 @@ public class MafiaConnection {
 
         socket.on(Socket.EVENT_CONNECT, args -> connected.set(true))
                 .on(Socket.EVENT_CONNECT_ERROR, args -> wait.set(false))
-                .on(Socket.EVENT_DISCONNECT, args -> wait.set(false))
-                .on(Socket.EVENT_CONNECT_TIMEOUT, args -> wait.set(false));
+                .on(Socket.EVENT_DISCONNECT, args -> wait.set(false));
 
 
         socket.connect();
@@ -142,7 +191,7 @@ public class MafiaConnection {
         }
 
         socket.off(Socket.EVENT_CONNECT).off(Socket.EVENT_CONNECT_ERROR)
-                .off(Socket.EVENT_DISCONNECT).off(Socket.EVENT_CONNECT_TIMEOUT);
+                .off(Socket.EVENT_DISCONNECT);
 
         if (!wait.get() || !connected.get())
             throw new NotConnectedException();
